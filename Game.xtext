@@ -1,0 +1,152 @@
+grammar fr.enseeiht.Game with org.eclipse.xtext.common.Terminals
+
+generate game "http://www.enseeiht.fr/Game"
+
+/* Jeu d'exploration
+ *   caractérisé par :
+ *     - nom
+ *   contient toutes les informations liées au jeu :
+ *     - le territoire à explorer
+ *     - l'explorateur incarné par le joueur
+ *     - les niveaux de difficulté
+ *     - les connaissances utilisées dans le jeu
+ *     - les objets existant dans le jeu
+ *     - les personnes existant dans le jeu
+ *     - lieu de départ
+ *     - lieu d'arrivée
+ */
+Jeu:
+  'jeu' name=ID '{'
+    territoire=Territoire
+    joueur=Explorateur
+    difficultes+=Difficulte+
+    connaissances+=Connaissance*
+    objets+=Objet*
+    personnes+=Personne*
+    lieuDepart=Lieu
+    lieuArrive=Lieu
+  '}'
+;
+
+/* Territoire
+ *   caractérisé par :
+ *     - nom
+ *   un territoire est composé de :
+ *     - lieux à explorer
+ *     - chemins reliant les différents lieux
+ */
+Territoire:
+  'territoire' name=ID '{'
+    lieux+=Lieu*
+    chemins+=Chemin*
+  '}'
+;
+
+/* Explorateur
+ *   caractérisé par :
+ *     - nom
+ *     - taille maximale des objets cumulés
+ *     - liste des connaissances possédées
+ *     - liste des objets possédés
+ *     - lieu actuel
+ */
+Explorateur:
+	'explorateur' name=ID '{'
+	  'tailleMax' tailleMax=INT
+	  ('connaissance' connaissances+=Connaissance)*
+	  ('objet' objets+=Objet)*
+	  lieuActuel=Lieu
+	'}'
+;
+
+/* Difficulté
+ *   les objets et connaissances en début de partie dépendent de la difficulté
+ *   caractérisée par :
+ *     - nom
+ *     - connaissances
+ *     - objets
+ */
+Difficulte:
+	'difficulte' name=ID '['
+    ('connaissance' connaissances+=Connaissance)*
+    ('objet' objets+=Objet)*
+	'}'
+;
+
+/* Connaissance
+ *   caractérisé par :
+ *     - nom
+ *     - description
+ */
+Connaissance:
+	'connaissance' name=ID '{'
+	  description=STRING
+	'}'
+;
+
+/* Personne
+ *   caractérisé par :
+ *     - nom
+ */
+Personne:
+	'personne' name=ID '{'
+	  
+	'}'
+;
+
+/* Objet
+ *   caractérisé par :
+ *     - nom
+ *     - description
+ *     - taille
+ */
+Objet:
+	'objet' name=ID '{'
+	  description=STRING
+	  'taille' taille=INT
+	'}'
+;
+
+/* Lieu
+ *   un lieu contient des connaissances, des objets et des personnes
+ *   caractérisé par :
+ *     - nom
+ *     - description
+ *     - connaissances/objets/personnes (trouvables)
+ */
+Lieu:
+	'lieu' name=ID '{'
+	  description=STRING
+    (trouvables+=Trouvable)*
+  '}'
+;
+
+/* Chemin
+ *   un chemin relie deux lieux
+ *   caractérisé par :
+ *     - nom
+ *     - description
+ *     - lieu1
+ *     - lieu2
+ *     - ouvert ? (booléen)
+ */
+Chemin:
+	'chemin' name=ID '{'
+    description=STRING
+    'lieu1' lieu1=Lieu
+	  'lieu2' lieu2=Lieu
+	  ouvert?='ouvert'
+	'}'
+;
+
+/* Trouvable
+ *   une connaissance, un objet ou une personne présent(e) dans un lieu peut être dans des états différents :
+ *     - visible ? (booléen)
+ *     - actif ? (booléen)
+ */
+Trouvable:
+ 	('connaissance' key=Connaissance | 'objet' key=Objet | 'personne' key=Personne) '{'
+ 		visible?='visible'
+    actif?='actif'
+ 	'}'
+;
