@@ -28,6 +28,16 @@ Jeu:
   '}'
 ;
 
+/* Description
+ * 
+ */
+ Description:
+ 	'description' name=ID '{'
+ 		'texte' texte=STRING
+ 		'conditions' (conditions+=Condition)*	
+ 	'}'
+ ;
+
 /* Territoire
  *   caractérisé par :
  *     - nom
@@ -80,19 +90,65 @@ Difficulte:
  */
 Connaissance:
 	'connaissance' name=ID '{'
-	  description=STRING
+	  'description' description=Description
 	'}'
 ;
 
 /* Personne
  *   caractérisé par :
- *     - nom
+ *     	- nom
+ *		- obligatoire (booléen)
+ * 		- l'intéraction de la personne
  */
 Personne:
 	'personne' name=ID '{'
-	  
+		'obligatoire' obligatoire?='obligatoire'
+		'interaction' interaction=Interaction
 	'}'
 ;
+/* Interaction
+ * 	caractérisé par :
+ * 		- les objets pouvant être donnés à l'explorateur
+ * 		- les connaissances et objets pouvant être données à l'explorateur
+ * 		- les choix possibles
+ */
+Interaction:
+	'interaction' name=ID '{'
+		('objet' objets+=Objet)*
+		'transmission' transmission=Transmission
+		('choix' choix+=Choix)*
+	'}'
+;
+/*	ChoixInteraction
+ * 	Indique les choix possibles lors d'une intéraction
+ * 	caractérisé par :
+ * 		- les actions d'un choix
+ * 		- estDebut (booleen)
+ * 		- estFin (booleen)
+ * 		- les conditions propres au choix
+ */
+Choix:
+	'choix' name=ID '{'
+		('action' actions+=Action)
+		estDebut?='estDebut'
+		estFin?='estFin'
+		('condition' conditions+=Condition)*
+	'}'
+;
+
+/* Action
+ * 	caractérisé par :
+ * 		- choixPrecedents
+ * 		- conditions
+ * 		- transmissionChoixAction : donne les objets et connaissances qui peuvent être donnés ou consommés
+ */
+ Action:
+ 	'action' name=ID '{'
+ 		('choixPrecedent' choixPrecedents+=Choix)*
+ 		('condition' conditions+=Condition)*
+ 		'transmission' transmissionChoixAction=Transmission
+ 	'}'
+ ;
 
 /* Objet
  *   caractérisé par :
@@ -102,7 +158,7 @@ Personne:
  */
 Objet:
 	'objet' name=ID '{'
-	  description=STRING
+	  description=Description
 	  'taille' taille=INT
 	'}'
 ;
@@ -113,11 +169,15 @@ Objet:
  *     - nom
  *     - description
  *     - connaissances/objets/personnes (trouvables)
+ * 	   - les chemins que peut emprunter l'explorateur
+ * 	   - les chemins obligatoire par l'explorateur
  */
 Lieu:
 	'lieu' name=ID '{'
-	  description=STRING
-    (trouvables+=Trouvable)*
+		description=Description
+    	(trouvables+=Trouvable)*
+    	(cheminsPossibles+=Chemin)*
+    	(cheminsObligatoires+=Chemin)*
   '}'
 ;
 
@@ -129,13 +189,51 @@ Lieu:
  *     - lieu1
  *     - lieu2
  *     - ouvert ? (booléen)
+ * 	   - visible ? (booléen)
+ * 	   - obligatoire? (booléen)
+ * 	   - les objets qui peuvent être donnés lors du passage du chemin
+ * 	   - les connaissances qui peuvent être données lors du passage du chemin
  */
 Chemin:
 	'chemin' name=ID '{'
-    description=STRING
-    'lieu1' lieu1=Lieu
-	  'lieu2' lieu2=Lieu
-	  ouvert?='ouvert'
+    	description=Description
+    	'lieu1' lieu1=Lieu
+		'lieu2' lieu2=Lieu
+		ouvert?='ouvert'
+		visible?='visible'
+		obligatoire?='obligatoire'
+		transmissionPassageChemin=Transmission
+	'}'
+;
+
+/* Transmission
+ *  Contient les objets et connaissances qui peuvent être transmis ou consommés durant le passage d'un chemin, ainsi que les conditions
+ * 	caractérisé par :	   
+ * 		- les objets qui peuvent être donnés lors du passage du chemin
+ * 	   	- les connaissances qui peuvent être données lors du passage du chemin
+ * 		- les conditions de la transmission et consommation d'objets et de connaissances
+ * 		
+ */
+Transmission:
+	'transmission' name=ID '{'
+		('objet' objets+=Objet)*
+		('connaissance' connaissance+=Connaissance)*
+		('condition' conditionsPassageChemin+=Condition)*
+	'}'
+;
+
+/* Condition
+ * 	Determine les conditions d'une action quelconque
+ * 	caractérisé par :
+ * 		- l'explorateur (pour acceder à son inventaire)
+ * 		- la difficulté
+ * 		- hasard
+ */
+Condition:
+	'condition' name=ID '{'
+		'explorateur' explorateur=Explorateur
+		'difficulte' difficulte=Difficulte
+		'hasard' hasard=INT
 	'}'
 ;
 
@@ -147,6 +245,7 @@ Chemin:
 Trouvable:
  	('connaissance' key=Connaissance | 'objet' key=Objet | 'personne' key=Personne) '{'
  		visible?='visible'
-    actif?='actif'
+ 		actif?='actif'
  	'}'
 ;
+
