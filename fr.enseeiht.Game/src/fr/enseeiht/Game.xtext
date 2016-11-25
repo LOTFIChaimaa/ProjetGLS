@@ -3,17 +3,17 @@ grammar fr.enseeiht.Game with org.eclipse.xtext.common.Terminals
 generate game "http://www.enseeiht.fr/Game"
 
 /* Jeu d'exploration
- *   caractérisé par :
- *     - nom
- *   contient toutes les informations liées au jeu :
- *     - le territoire à explorer
- *     - l'explorateur incarné par le joueur
- *     - les niveaux de difficulté
- *     - les connaissances utilisées dans le jeu
- *     - les objets existant dans le jeu
- *     - les personnes existant dans le jeu
- *     - lieu de départ
- *     - lieu d'arrivée
+ *	caractérisé par :
+ *		- nom
+ *	contient toutes les informations liées au jeu :
+ *		- le territoire à explorer
+ *		- l'explorateur incarné par le joueur
+ *		- les niveaux de difficulté
+ *		- les connaissances utilisées dans le jeu
+ *		- les objets existant dans le jeu
+ *		- les personnes existant dans le jeu
+ *		- lieu de départ
+ *		- lieu d'arrivée
  */
 Jeu:
   'jeu' name=ID '{'
@@ -90,27 +90,27 @@ Difficulte:
  */
 Connaissance:
 	'connaissance' name=ID '{'
-	  'description' description=Description
+		'description' description=Description
 	'}'
 ;
 
 /* Personne
- *   caractérisé par :
- *     	- nom
+ *	caractérisé par :
+ *		- nom
  *		- obligatoire (booléen)
- * 		- l'intéraction de la personne
+ *		- l'intéraction de la personne
  */
 Personne:
 	'personne' name=ID '{'
-		'obligatoire' obligatoire?='obligatoire'
+		obligatoire?='obligatoire'
 		'interaction' interaction=Interaction
 	'}'
 ;
 /* Interaction
- * 	caractérisé par :
- * 		- les objets pouvant être donnés à l'explorateur
- * 		- les connaissances et objets pouvant être données à l'explorateur
- * 		- les choix possibles
+ *	caractérisé par :
+ *		- les objets pouvant être donnés à l'explorateur
+ *		- les connaissances et objets pouvant être donnés à l'explorateur
+ *		- les choix possibles
  */
 Interaction:
 	'interaction' name=ID '{'
@@ -119,133 +119,155 @@ Interaction:
 		('choix' choix+=Choix)*
 	'}'
 ;
-/*	ChoixInteraction
- * 	Indique les choix possibles lors d'une intéraction
+/* Choix
+ * 	Indique les choix possibles lors d'une interaction
  * 	caractérisé par :
- * 		- les actions d'un choix
+ * 		- action réalisée par le choix
  * 		- estDebut (booleen)
  * 		- estFin (booleen)
  * 		- les conditions propres au choix
  */
 Choix:
 	'choix' name=ID '{'
-		('action' actions+=Action)
+		action=Action
 		estDebut?='estDebut'
 		estFin?='estFin'
-		('condition' conditions+=Condition)*
+		(conditions+=Condition)*
 	'}'
 ;
 
 /* Action
  * 	caractérisé par :
- * 		- choixPrecedents
- * 		- conditions
- * 		- transmissionChoixAction : donne les objets et connaissances qui peuvent être donnés ou consommés
+ * 		- choix nécessaires
+ * 		- conditions nécessaires
+ * 		- transmissions : donnent les objets et connaissances qui peuvent être donnés ou consommés
  */
  Action:
- 	'action' name=ID '{'
- 		('choixPrecedent' choixPrecedents+=Choix)*
- 		('condition' conditions+=Condition)*
- 		'transmission' transmissionChoixAction=Transmission
- 	'}'
- ;
+	'action' name=ID '{'
+		('choix' choixPrecedents+=Choix)*
+		('condition' conditions+=Condition)*
+		(transmissions+=Transmission)*
+	'}'
+;
 
 /* Objet
- *   caractérisé par :
- *     - nom
- *     - description
- *     - taille
+ *	caractérisé par :
+ *		- nom
+ *		- description
+ *		- la transformation de l'objet
+ *		- taille
  */
 Objet:
 	'objet' name=ID '{'
-	  description=Description
-	  'taille' taille=INT
+		description=Description
+	  	(transformations+=Transformation)*
+		'taille' taille=INT
+	'}'
+;
+
+/* Tranformation
+ *  Permet de gérer la transformation des objets
+ * 	caractérisé par :
+ * 		- conditions de la transformation
+ * 		- objets possibles 
+ */
+Transformation:
+	'transformation' '{'
+		('conditions' conditions+=Condition)
+		'objetResultat' objetResultat=Objet
 	'}'
 ;
 
 /* Lieu
- *   un lieu contient des connaissances, des objets et des personnes
- *   caractérisé par :
- *     - nom
- *     - description
- *     - connaissances/objets/personnes (trouvables)
- * 	   - les chemins que peut emprunter l'explorateur
- * 	   - les chemins obligatoire par l'explorateur
+ *	un lieu contient des connaissances, des objets et des personnes
+ *	caractérisé par :
+ *		- nom
+ *		- description
+ *		- connaissances/objets/personnes (trouvables)
+ *		- les chemins que peut emprunter l'explorateur
+ *		- les chemins obligatoire par l'explorateur
  */
 Lieu:
 	'lieu' name=ID '{'
 		description=Description
-    	(trouvables+=Trouvable)*
-    	(cheminsPossibles+=Chemin)*
-    	(cheminsObligatoires+=Chemin)*
-  '}'
+		(trouvables+=Trouvable)*
+		'cheminPossible' (cheminsPossibles+=Chemin)*
+		'cheminObligatoire' (cheminsObligatoires+=Chemin)*
+	'}'
 ;
 
 /* Chemin
- *   un chemin relie deux lieux
- *   caractérisé par :
- *     - nom
- *     - description
- *     - lieu1
- *     - lieu2
- *     - ouvert ? (booléen)
- * 	   - visible ? (booléen)
- * 	   - obligatoire? (booléen)
- * 	   - les objets qui peuvent être donnés lors du passage du chemin
- * 	   - les connaissances qui peuvent être données lors du passage du chemin
+ *	un chemin relie deux lieux
+ *	caractérisé par :
+ *		- nom
+ *		- description
+ *		- lieu1
+ *		- lieu2
+ *		- ouvert ? (booléen)
+ *		- visible ? (booléen)
+ *		- obligatoire? (booléen)
+ *		- les objets qui peuvent être donnés lors du passage du chemin (transmission)
+ *		- les connaissances qui peuvent être données lors du passage du chemin (transmission)
  */
 Chemin:
 	'chemin' name=ID '{'
-    	description=Description
-    	'lieu1' lieu1=Lieu
+		description=Description
+		'lieu1' lieu1=Lieu
 		'lieu2' lieu2=Lieu
 		ouvert?='ouvert'
 		visible?='visible'
 		obligatoire?='obligatoire'
-		transmissionPassageChemin=Transmission
+		(transmissions+=Transmission)*
 	'}'
 ;
 
 /* Transmission
- *  Contient les objets et connaissances qui peuvent être transmis ou consommés durant le passage d'un chemin, ainsi que les conditions
- * 	caractérisé par :	   
- * 		- les objets qui peuvent être donnés lors du passage du chemin
- * 	   	- les connaissances qui peuvent être données lors du passage du chemin
- * 		- les conditions de la transmission et consommation d'objets et de connaissances
+ *	Contient les objets et connaissances qui peuvent être transmis ou consommés durant le passage d'un chemin, ainsi que les conditions
+ *	caractérisé par :	   
+ *		- les objets qui peuvent être transmis/consommés lors du passage du chemin
+ *		- les connaissances qui peuvent être transmises lors du passage du chemin
+ *		- les conditions de la transmission et consommation d'objets et de connaissances
  * 		
  */
 Transmission:
-	'transmission' name=ID '{'
-		('objet' objets+=Objet)*
+	'transmission' '{'
+		('objetTransmis' objets+=Objet)*
+		('objetConsomme' objets+=Objet)*
 		('connaissance' connaissance+=Connaissance)*
-		('condition' conditionsPassageChemin+=Condition)*
+		(conditions+=Condition)
 	'}'
 ;
 
 /* Condition
- * 	Determine les conditions d'une action quelconque
- * 	caractérisé par :
- * 		- l'explorateur (pour acceder à son inventaire)
- * 		- la difficulté
- * 		- hasard
+ *	Determine les conditions d'une action quelconque
+ *	caractérisé par :
+ *		- objets nécessaires
+ *		- connaissances nécessaires
+ *		- la difficulté
+ *		- hasard
  */
 Condition:
-	'condition' name=ID '{'
-		'explorateur' explorateur=Explorateur
+	'condition' '{'
+		'objet' objets+=Objet
+		'connaissance' connaissances+=Connaissance
 		'difficulte' difficulte=Difficulte
 		'hasard' hasard=INT
 	'}'
 ;
 
 /* Trouvable
- *   une connaissance, un objet ou une personne présent(e) dans un lieu peut être dans des états différents :
- *     - visible ? (booléen)
- *     - actif ? (booléen)
+ *	une connaissance, un objet ou une personne présent(e) dans un lieu peut être dans des états différents :
+ *		- visible ? (booléen)
+ * 		- condition de visibilité
+ *		- actif ? (booléen)
+ * 		- condition d'activation
  */
 Trouvable:
  	('connaissance' key=Connaissance | 'objet' key=Objet | 'personne' key=Personne) '{'
  		visible?='visible'
+ 		'visibilite' conditionVisibilite=Condition
  		actif?='actif'
+ 		'activation' conditionActivation=Condition
  	'}'
 ;
 
