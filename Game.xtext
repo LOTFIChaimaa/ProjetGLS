@@ -16,81 +16,85 @@ generate game "http://www.enseeiht.fr/Game"
  *		- lieu d'arrivée
  */
 Jeu:
-  'jeu' name=ID '{'
-    territoire=Territoire
-    joueur=Explorateur
-    difficultes+=Difficulte+
-    connaissances+=Connaissance*
-    objets+=Objet*
-    personnes+=Personne*
-    lieuDepart=Lieu
-    lieuArrive=Lieu
-  '}'
+	'jeu' name=ID '{'
+		territoire=Territoire
+		joueur=Explorateur
+		difficultes+=Difficulte+
+		connaissances+=Connaissance*
+		objets+=Objet*
+		personnes+=Personne*
+		'lieuDepart' lieuDepart=[Lieu|ID]
+		'lieuArrivee' lieuArrivee=[Lieu|ID]
+	'}'
 ;
 
 /* Description
- * 
+ *	caractérisé par :
+ *		- texte de description
+ * 		- conditions d'activation de cette description
  */
  Description:
- 	'description' name=ID '{'
+ 	'description' '{'
  		'texte' texte=STRING
- 		'conditions' (conditions+=Condition)*	
+ 		(conditions+=Condition)*
  	'}'
  ;
 
 /* Territoire
- *   caractérisé par :
- *     - nom
- *   un territoire est composé de :
- *     - lieux à explorer
- *     - chemins reliant les différents lieux
+ *	caractérisé par :
+ *		- nom
+ *	un territoire est composé de :
+ *		- lieux à explorer
+ *		- chemins reliant les différents lieux
  */
 Territoire:
-  'territoire' name=ID '{'
-    lieux+=Lieu*
-    chemins+=Chemin*
-  '}'
+	'territoire' name=ID '{'
+		lieux+=Lieu*
+		chemins+=Chemin*
+	'}'
 ;
 
 /* Explorateur
- *   caractérisé par :
- *     - nom
- *     - taille maximale des objets cumulés
- *     - liste des connaissances possédées
- *     - liste des objets possédés
- *     - lieu actuel
+ *	caractérisé par :
+ *		- nom
+ * 		- difficulté choisie
+ *		- taille maximale des objets cumulés
+ *		- liste des connaissances possédées
+ *		- liste des objets possédés
+ *		- lieu actuel
  */
 Explorateur:
 	'explorateur' name=ID '{'
-	  'tailleMax' tailleMax=INT
-	  ('connaissance' connaissances+=Connaissance)*
-	  ('objet' objets+=Objet)*
-	  lieuActuel=Lieu
+		'difficulte' difficulte=[Difficulte|ID]
+		'tailleMax' tailleMax=INT
+		('connaissance' connaissances+=[Connaissance|ID])*
+		('objet' objets+=[Objet|ID])*
+		lieuActuel=[Lieu|ID]
 	'}'
 ;
 
 /* Difficulté
- *   les objets et connaissances en début de partie dépendent de la difficulté
- *   caractérisée par :
- *     - nom
- *     - connaissances
- *     - objets
+ *	les objets et connaissances en début de partie dépendent de la difficulté
+ *	caractérisée par :
+ *		- nom
+ *		- connaissances
+ *		- objets
  */
 Difficulte:
-	'difficulte' name=ID '['
-    ('connaissance' connaissances+=Connaissance)*
-    ('objet' objets+=Objet)*
+	'difficulte' name=ID '{'
+		('connaissance' connaissances+=[Connaissance|ID])*
+		('objet' objets+=[Objet|ID])*
 	'}'
 ;
 
 /* Connaissance
- *   caractérisé par :
- *     - nom
- *     - description
+ *	caractérisé par :
+ *		- nom
+ *		- descriptions (plusieurs car dépendent de conditions)
  */
 Connaissance:
 	'connaissance' name=ID '{'
-		'description' description=Description
+		(descriptions+=Description)+
 	'}'
 ;
 
@@ -103,33 +107,31 @@ Connaissance:
 Personne:
 	'personne' name=ID '{'
 		obligatoire?='obligatoire'
-		'interaction' interaction=Interaction
+		interaction=Interaction
 	'}'
 ;
 /* Interaction
  *	caractérisé par :
- *		- les objets pouvant être donnés à l'explorateur
  *		- les connaissances et objets pouvant être donnés à l'explorateur
  *		- les choix possibles
  */
 Interaction:
-	'interaction' name=ID '{'
-		('objet' objets+=Objet)*
-		'transmission' transmission=Transmission
-		('choix' choix+=Choix)*
+	'interaction' '{'
+		(transmission+=Transmission)*
+		(choix+=Choix)+
 	'}'
 ;
 /* Choix
  * 	Indique les choix possibles lors d'une interaction
  * 	caractérisé par :
- * 		- action réalisée par le choix
+ * 		- actions réalisables par le choix
  * 		- estDebut (booleen)
  * 		- estFin (booleen)
  * 		- les conditions propres au choix
  */
 Choix:
 	'choix' name=ID '{'
-		action=Action
+		(actions+=Action)*
 		estDebut?='estDebut'
 		estFin?='estFin'
 		(conditions+=Condition)*
@@ -143,23 +145,23 @@ Choix:
  * 		- transmissions : donnent les objets et connaissances qui peuvent être donnés ou consommés
  */
  Action:
-	'action' name=ID '{'
-		('choix' choixPrecedents+=Choix)*
-		('condition' conditions+=Condition)*
-		(transmissions+=Transmission)*
+	'action' '{'
+		('choix' choixNecessaires+=[Choix|ID])*
+		(conditions+=Condition)*
+		(transmissions+=Transmission)+
 	'}'
 ;
 
 /* Objet
  *	caractérisé par :
  *		- nom
- *		- description
+ *		- descriptions (plusieurs car dépendent de conditions)
  *		- la transformation de l'objet
  *		- taille
  */
 Objet:
 	'objet' name=ID '{'
-		description=Description
+		(descriptions+=Description)+
 	  	(transformations+=Transformation)*
 		'taille' taille=INT
 	'}'
@@ -169,30 +171,45 @@ Objet:
  *  Permet de gérer la transformation des objets
  * 	caractérisé par :
  * 		- conditions de la transformation
- * 		- objets possibles 
+ * 		- résultats possibles
  */
 Transformation:
 	'transformation' '{'
-		('conditions' conditions+=Condition)
-		'objetResultat' objetResultat=Objet
+		(conditions+=Condition)
+		(resultats+=Resultat)+
 	'}'
+;
+
+/* Resultat
+ *	résultat possible d'une transformation d'objet
+ *	caractérisé par :
+ * 		- objet résultat
+ * 		- conditions d'obtention
+ */
+Resultat:
+  'resultat' '{'
+    'objet' objet=Objet
+    (conditions+=Condition)*
+  '}'
 ;
 
 /* Lieu
  *	un lieu contient des connaissances, des objets et des personnes
  *	caractérisé par :
  *		- nom
- *		- description
+ *		- descriptions (plusieurs car dépendent de conditions)
  *		- connaissances/objets/personnes (trouvables)
+ * 		- objets déposables
  *		- les chemins que peut emprunter l'explorateur
  *		- les chemins obligatoire par l'explorateur
  */
 Lieu:
 	'lieu' name=ID '{'
-		description=Description
+		(descriptions+=Description)+
 		(trouvables+=Trouvable)*
-		'cheminPossible' (cheminsPossibles+=Chemin)*
-		'cheminObligatoire' (cheminsObligatoires+=Chemin)*
+		(deposables+=Deposable)*
+		'cheminPossible' (cheminsPossibles+=[Chemin|ID])*
+		'cheminObligatoire' (cheminsObligatoires+=[Chemin|ID])*
 	'}'
 ;
 
@@ -200,23 +217,26 @@ Lieu:
  *	un chemin relie deux lieux
  *	caractérisé par :
  *		- nom
- *		- description
+ *		- descriptions (plusieurs car dépendent de conditions)
  *		- lieu1
  *		- lieu2
  *		- ouvert ? (booléen)
+ * 		- condition d'ouverture
  *		- visible ? (booléen)
+ * 		- condition de visibilité
  *		- obligatoire? (booléen)
  *		- les objets qui peuvent être donnés lors du passage du chemin (transmission)
  *		- les connaissances qui peuvent être données lors du passage du chemin (transmission)
  */
 Chemin:
 	'chemin' name=ID '{'
-		description=Description
-		'lieu1' lieu1=Lieu
-		'lieu2' lieu2=Lieu
+		(descriptions+=Description)+
+		'lieu1' lieu1=[Lieu|ID]
+		'lieu2' lieu2=[Lieu|ID]
 		ouvert?='ouvert'
+		('ouverture' conditionsOuverture+=Condition)*
 		visible?='visible'
-		obligatoire?='obligatoire'
+		('visibilite' conditionsVisibilite+=Condition)*
 		(transmissions+=Transmission)*
 	'}'
 ;
@@ -231,9 +251,9 @@ Chemin:
  */
 Transmission:
 	'transmission' '{'
-		('objetTransmis' objets+=Objet)*
-		('objetConsomme' objets+=Objet)*
-		('connaissance' connaissance+=Connaissance)*
+		('objetTransmis' objets+=[Objet|ID])*
+		('objetConsomme' objets+=[Objet|ID])*
+		('connaissance' connaissance+=[Connaissance|ID])*
 		(conditions+=Condition)
 	'}'
 ;
@@ -248,9 +268,9 @@ Transmission:
  */
 Condition:
 	'condition' '{'
-		'objet' objets+=Objet
-		'connaissance' connaissances+=Connaissance
-		'difficulte' difficulte=Difficulte
+		'objet' objets+=[Objet|ID]
+		'connaissance' connaissances+=[Connaissance|ID]
+		'difficulte' difficulte=[Difficulte|ID]
 		'hasard' hasard=INT
 	'}'
 ;
@@ -258,16 +278,28 @@ Condition:
 /* Trouvable
  *	une connaissance, un objet ou une personne présent(e) dans un lieu peut être dans des états différents :
  *		- visible ? (booléen)
- * 		- condition de visibilité
+ * 		- conditions de visibilité
  *		- actif ? (booléen)
- * 		- condition d'activation
+ * 		- conditions d'activation
  */
 Trouvable:
- 	('connaissance' key=Connaissance | 'objet' key=Objet | 'personne' key=Personne) '{'
+ 	('connaissance' concerne=[Connaissance|ID] | 'objet' concerne=[Objet|ID] | 'personne' concerne=[Personne|ID]) '{'
  		visible?='visible'
- 		'visibilite' conditionVisibilite=Condition
+ 		('visibilite' conditionsVisibilite+=Condition)*
  		actif?='actif'
- 		'activation' conditionActivation=Condition
+ 		('activation' conditionsActivation+=Condition)*
  	'}'
+;
+
+/* Deposable
+ *  désigne un objet pouvant être dépose dans un lieu
+ * caractérisé par :
+ * 		- objet concerné
+ * 		- conditions nécessaires
+ */
+Deposable:
+	'deposable' concerne=[Objet|ID] '{'
+		(conditions+=Condition)
+	'}'
 ;
 
