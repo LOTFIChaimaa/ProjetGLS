@@ -1,0 +1,131 @@
+jeu jeuEnigme {
+	
+	// Le territoire
+	territoire ter {
+		lieu enigme {
+			description {
+				texte "Enigme"
+			}
+			personne sphinx {
+				visible
+				actif
+				
+			}
+		}
+		lieu succes {
+			description {
+				texte "Succes"
+			}
+		}
+		lieu echec {
+			description {
+				texte "Echec"
+			}
+		}
+		chemin cheminVersSucces {
+			description {
+				texte "Le chemin vers la reussite"
+			}
+			lieu1 enigme
+			lieu2 succes
+			ouvert // Marche pas
+			ouverture condition {
+				connaissance reussite // On vérifie que le joueur possède une "reussite"
+				difficulte standard
+				hasard 0
+			}
+			visible // Marche pas
+		}
+		chemin cheminVersDefaite {
+			description {
+				texte "Le chemin vers la défaite"
+			}
+			lieu1 enigme
+			lieu2 echec
+			ouvert
+			ouverture condition {
+				objet tentative // On vérifie que le joueur ne possède pas de "tentative"
+				difficulte standard
+				hasard 0
+			}
+			visible // Marche pas
+		}
+	}
+	
+	// L'explorateur
+	explorateur joueur {
+		difficulte standard
+		tailleMax 10
+		objet tentative
+		objet tentative
+		objet tentative
+		lieuActuel // marche pas
+	}
+
+	// La difficulté
+	difficulte standard {}
+	
+	// Les connaissances
+	connaissance reussite {
+		description {
+			texte "La réponse à l'énigme à été trouvé"
+		}
+	}
+	
+	// Les objets
+	objet tentative {
+		description {
+			texte "Donne une possibilité d'echec au joueur"
+		}
+		taille 0
+	}
+	
+	// Les personnes
+	personne sphinx {
+		description {
+			texte "blabla question"
+		}
+		obligatoire
+		interaction {
+			transmission {
+				objetConsomme tentative
+				connaissance reussite
+			}
+			// Choix 1 Faux
+			choix choix1 {
+				action {
+					choix choix1
+					transmission {
+						objetConsomme tentative
+					}
+				}
+				estDebut // marche pas
+				estFin // marche pas
+			}
+			// Choix 2 Vrai
+			choix choix2 {
+				action {
+					choix choix2
+					transmission {
+						connaissance reussite
+					}
+				}
+				estDebut // marche pas
+				estFin // marche pas
+			}
+			// Choix 3 Faux
+			choix choix3 {
+				action {
+					choix choix3
+					transmission {
+						objetConsomme tentative
+					}
+				}
+				estDebut // marche pas
+				estFin // marche pas
+			}
+		}
+	}
+	lieuDepart // marche pas
+	
+}
