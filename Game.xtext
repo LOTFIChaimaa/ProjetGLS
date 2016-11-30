@@ -6,7 +6,8 @@ generate game "http://www.enseeiht.fr/Game"
  *	caractérisé par :
  *		- nom
  *	contient toutes les informations liées au jeu :
- *		- le territoire à explorer
+ *		- lieux à explorer
+ *		- chemins reliant les différents lieux
  *		- l'explorateur incarné par le joueur
  *		- les niveaux de difficulté
  *		- les connaissances utilisées dans le jeu
@@ -17,7 +18,8 @@ generate game "http://www.enseeiht.fr/Game"
  */
 Jeu:
 	'jeu' name=ID '{'
-		territoire=Territoire
+		lieux+=Lieu*
+		chemins+=Chemin*
 		joueur=Explorateur
 		difficultes+=Difficulte+
 		connaissances+=Connaissance*
@@ -40,20 +42,6 @@ Jeu:
  	'}'
  ;
 
-/* Territoire
- *	caractérisé par :
- *		- nom
- *	un territoire est composé de :
- *		- lieux à explorer
- *		- chemins reliant les différents lieux
- */
-Territoire:
-	'territoire' name=ID '{'
-		lieux+=Lieu*
-		chemins+=Chemin*
-	'}'
-;
-
 /* Explorateur
  *	caractérisé par :
  *		- nom
@@ -67,8 +55,8 @@ Explorateur:
 	'explorateur' name=ID '{'
 		'difficulte' difficulte=[Difficulte|ID]
 		'tailleMax' tailleMax=INT
-		('connaissance' connaissances+=[Connaissance|ID])*
-		('objet' objets+=[Objet|ID])*
+		('connaissances' (connaissances+=[Connaissance|ID])+)?
+		('objets' (objets+=[Objet|ID])+)?
 		'lieuActuel' lieuActuel=[Lieu|ID]
 	'}'
 ;
@@ -82,8 +70,8 @@ Explorateur:
  */
 Difficulte:
 	'difficulte' name=ID '{'
-		('connaissance' connaissances+=[Connaissance|ID])*
-		('objet' objets+=[Objet|ID])*
+		('connaissances' (connaissances+=[Connaissance|ID])+)?
+		('objets' (objets+=[Objet|ID])+)?
 	'}'
 ;
 
@@ -108,7 +96,7 @@ Connaissance:
 Personne:
 	'personne' name=ID '{'
 	    description=Description
-		obligatoire?='obligatoire'
+		(obligatoire?='obligatoire')?
 		interaction=Interaction
 	'}'
 ;
@@ -134,8 +122,8 @@ Interaction:
 Choix:
 	'choix' name=ID '{'
 		(actions+=Action)*
-		estDebut?='estDebut'
-		estFin?='estFin'
+		(estDebut?='estDebut')?
+		(estFin?='estFin')?
 		(conditions+=Condition)*
 	'}'
 ;
@@ -148,7 +136,7 @@ Choix:
  */
  Action:
 	'action' '{'
-		('choix' choixNecessaires+=[Choix|ID])*
+		('choixNecessaires' (choixNecessaires+=[Choix|ID])+)?
 		(conditions+=Condition)*
 		(transmissions+=Transmission)+
 	'}'
@@ -210,8 +198,8 @@ Lieu:
 		(descriptions+=Description)+
 		(trouvables+=Trouvable)*
 		(deposables+=Deposable)*
-		('cheminPossible' cheminsPossibles+=[Chemin|ID])*
-		('cheminObligatoire' cheminsObligatoires+=[Chemin|ID])*
+		('cheminsPossibles' (cheminsPossibles+=[Chemin|ID])+)?
+		('cheminsObligatoires' (cheminsObligatoires+=[Chemin|ID])+)?
 	'}'
 ;
 
@@ -235,10 +223,10 @@ Chemin:
 		(descriptions+=Description)+
 		'lieu1' lieu1=[Lieu|ID]
 		'lieu2' lieu2=[Lieu|ID]
-		ouvert?='ouvert'
-		('ouverture' conditionsOuverture+=Condition)*
-		visible?='visible'
-		('visibilite' conditionsVisibilite+=Condition)*
+		(ouvert?='ouvert')?
+		('ouverture' (conditionsOuverture+=Condition)+)?
+		(visible?='visible')?
+		('visibilite' (conditionsVisibilite+=Condition)+)?
 		(transmissions+=Transmission)*
 	'}'
 ;
@@ -253,9 +241,9 @@ Chemin:
  */
 Transmission:
 	'transmission' '{'
-		('objetTransmis' objets+=[Objet|ID])*
-		('objetConsomme' objets+=[Objet|ID])*
-		('connaissance' connaissance+=[Connaissance|ID])*
+		('objetsTransmis' (objets+=[Objet|ID])+)?
+		('objetsConsommes' (objets+=[Objet|ID])+)?
+		('connaissances' (connaissances+=[Connaissance|ID])+)?
 		(conditions+=Condition)*
 	'}'
 ;
@@ -270,8 +258,10 @@ Transmission:
  */
 Condition:
 	'condition' '{'
-		('objet' objets+=[Objet|ID])*
-		('connaissance' connaissances+=[Connaissance|ID])*
+		('objetsPossedes' (objetsPossedes+=[Objet|ID])+)?
+		('objetsManquants' (objetsManquants+=[Objet|ID])+)?
+		('connaissancesPossedees' (connaissancesPossedees+=[Connaissance|ID])+)?
+		('connaissancesManquantes' (connaissancesManquantes+=[Connaissance|ID])+)?
 		'difficulte' difficulte=[Difficulte|ID]
 		'hasard' hasard=INT
 	'}'
@@ -286,10 +276,10 @@ Condition:
  */
 Trouvable:
  	('connaissance' concerne=[Connaissance|ID] | 'objet' concerne=[Objet|ID] | 'personne' concerne=[Personne|ID]) '{'
- 		visible?='visible'
- 		('visibilite' conditionsVisibilite+=Condition)*
- 		actif?='actif'
- 		('activation' conditionsActivation+=Condition)*
+ 		(visible?='visible')?
+ 		('visibilite' (conditionsVisibilite+=Condition)+)?
+ 		(actif?='actif')?
+ 		('activation' (conditionsActivation+=Condition)+)?
  	'}'
 ;
 

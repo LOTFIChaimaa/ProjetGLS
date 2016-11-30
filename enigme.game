@@ -1,0 +1,119 @@
+jeu jeuEnigme {
+	
+	// Le territoire
+ 	lieu enigme {
+		description {
+			texte "Enigme"
+		}
+		personne sphinx {
+			visible
+			actif
+		}
+		cheminsObligatoires cheminVersSucces cheminVersDefaite
+	}
+	lieu succes {
+		description {
+			texte "Succes"
+		}
+	}
+	lieu echec {
+		description {
+			texte "Echec"
+		}
+	}
+	
+	chemin cheminVersSucces {
+		description {
+			texte "Le chemin vers la reussite"
+		}
+		lieu1 enigme
+		lieu2 succes
+		ouvert
+		visibilite condition {
+			connaissancesPossedees reussite // On vérifie que le joueur possède une "reussite"
+			difficulte standard
+			hasard 0
+		}
+	}
+	chemin cheminVersDefaite {
+		description {
+			texte "Le chemin vers la défaite"
+		}
+		lieu1 enigme
+		lieu2 echec
+		ouvert
+		visibilite condition {
+			objetsManquants tentative // On vérifie que le joueur ne possède pas de "tentative"
+			difficulte standard
+			hasard 0
+		}
+	}
+
+	explorateur joueur {
+		difficulte standard
+		tailleMax 0
+		lieuActuel enigme
+	}
+
+	// Les difficultés
+	difficulte difficile {
+		objets tentative
+	}
+	difficulte standard {
+		objets tentative tentative tentative
+	}
+	difficulte facile {
+		objets tentative tentative tentative tentative tentative
+	}
+	
+	
+	// Les connaissances
+	connaissance reussite {
+		description {
+			texte "La réponse à l'énigme à été trouvée"
+		}
+	}
+	
+	// Les objets
+	objet tentative {
+		description {
+			texte "Donne une possibilité d'echec au joueur"
+		}
+		taille 0
+	}
+	
+	// Les personnes
+	personne sphinx {
+		description {
+			texte "QUESTION : Quelle est la réponse ?"
+		}
+		obligatoire
+		interaction {
+			choix reponses {
+				// Action 1 Faux
+				action {
+					transmission {
+						objetsConsommes tentative 
+					}
+				}
+				// Action 2 Vrai
+				action {
+					transmission {
+						connaissances reussite
+					}
+				}
+				// Action 3 Faux
+				action {
+					transmission {
+						objetsConsommes tentative
+					}
+				}
+				estDebut
+				estFin
+			}
+		}
+	}
+	
+	lieuDepart enigme
+	lieuArrivee succes
+}
