@@ -69,7 +69,7 @@ Explorateur:
 		'tailleMax' tailleMax=INT
 		('connaissance' connaissances+=[Connaissance|ID])*
 		('objet' objets+=[Objet|ID])*
-		lieuActuel=[Lieu|ID]
+		'lieuActuel' lieuActuel=[Lieu|ID]
 	'}'
 ;
 
@@ -101,11 +101,13 @@ Connaissance:
 /* Personne
  *	caractérisé par :
  *		- nom
+ * 		- description
  *		- obligatoire (booléen)
  *		- l'intéraction de la personne
  */
 Personne:
 	'personne' name=ID '{'
+	    description=Description
 		obligatoire?='obligatoire'
 		interaction=Interaction
 	'}'
@@ -208,8 +210,8 @@ Lieu:
 		(descriptions+=Description)+
 		(trouvables+=Trouvable)*
 		(deposables+=Deposable)*
-		'cheminPossible' (cheminsPossibles+=[Chemin|ID])*
-		'cheminObligatoire' (cheminsObligatoires+=[Chemin|ID])*
+		('cheminPossible' cheminsPossibles+=[Chemin|ID])*
+		('cheminObligatoire' cheminsObligatoires+=[Chemin|ID])*
 	'}'
 ;
 
@@ -254,7 +256,7 @@ Transmission:
 		('objetTransmis' objets+=[Objet|ID])*
 		('objetConsomme' objets+=[Objet|ID])*
 		('connaissance' connaissance+=[Connaissance|ID])*
-		(conditions+=Condition)
+		(conditions+=Condition)*
 	'}'
 ;
 
@@ -268,8 +270,8 @@ Transmission:
  */
 Condition:
 	'condition' '{'
-		'objet' objets+=[Objet|ID]
-		'connaissance' connaissances+=[Connaissance|ID]
+		('objet' objets+=[Objet|ID])*
+		('connaissance' connaissances+=[Connaissance|ID])*
 		'difficulte' difficulte=[Difficulte|ID]
 		'hasard' hasard=INT
 	'}'
@@ -302,4 +304,3 @@ Deposable:
 		(conditions+=Condition)
 	'}'
 ;
-
