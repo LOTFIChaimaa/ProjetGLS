@@ -46,7 +46,7 @@ jeu jeuEnigme {
 			objetsManquants tentative // On vérifie que le joueur ne possède pas de "tentative"
 			difficulte standard
 			hasard 0
-		}
+		} 
 	}
 
 	explorateur joueur {
