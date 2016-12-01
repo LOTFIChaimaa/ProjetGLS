@@ -1,0 +1,100 @@
+t 105.0 85.0 conditionVisibiliteCheminVersSucces 0 w n
+t 325.0 420.0 debutSphinx 0 w n
+t 465.0 525.0 reponsesAction1 0 w n
+t 340.0 565.0 reponsesAction2 0 w n
+t 500.0 510.0 reponsesAction3 0 w n
+t 95.0 265.0 victoire 0 w n
+t 345.0 120.0 facileInitialisation n 0 w n {} ne
+t 380.0 590.0 debutInteractionSphinx 0 w n
+t 565.0 140.0 conditionVisibiliteCheminVersDefaite 0 w n
+t 415.0 115.0 cheminVersDefaite c 0 w n chemin ne
+p 45.0 35.0 reussitePossedee 0 n connaissance ne
+p 160.0 140.0 cheminVersSuccesVisible 0 n
+p 200.0 115.0 cheminVersSuccesOuvert 1 n
+p 165.0 235.0 succes 0 n lieu ne
+p 330.0 510.0 sphinx 0 n personne ne
+p 435.0 575.0 reponses 0 n choix ne
+p 435.0 445.0 action1 0 n action ne
+p 290.0 495.0 action2 0 n action ne
+p 25.0 295.0 jeuGagne 0 n
+p 355.0 30.0 facile 0 n difficulte ne
+p 305.0 30.0 difficile 0 n difficulte ne
+p 465.0 50.0 cheminVersDefaiteOuvert 1 n
+p 420.0 30.0 echec 0 n lieu ne
+p 500.0 100.0 cheminVersDefaiteVisible 0 n
+p 675.0 260.0 tentativeManquante 0 n objet ne
+t 510.0 210.0 transmissionAction3Vide 0 w n
+p 105.0 520.0 reussitePosedee 0 n
+t 105.0 365.0 transmissionAction2 sw 0 w n {} ne
+p 450.0 170.0 tentativePossedee 0 n objet ne
+t 585.0 300.0 transmissionAction1Vide se 0 w n {} ne
+p 580.0 420.0 action3 0 n action ne
+t 475.0 300.0 transmissionAction3 e 0 w n {} ne
+t 395.0 325.0 transmissionAction1 e 0 w n {} ne
+p 315.0 330.0 enigme 0 n lieu ne
+t 395.0 215.0 standardInitialisation e 0 w n {} ne
+t 280.0 110.0 difficileInitialisation w 0 w n {} ne
+p 230.0 270.0 reussiteManquante 0 n connaissance ne
+t 225.0 180.0 cheminVersSucces w 0 w n chemin ne
+p 390.0 265.0 standard 1 n difficulte ne
+e standardInitialisation tentativePossedee 3 n
+e standardInitialisation reussiteManquante 1 n
+e standardInitialisation enigme 1 n
+e standard standardInitialisation 1 n
+e cheminVersDefaite echec 1 n
+e cheminVersDefaiteOuvert cheminVersDefaite ?1 n
+e cheminVersDefaiteVisible cheminVersDefaite ?1 n
+e enigme cheminVersDefaite 1 n
+e conditionVisibiliteCheminVersDefaite cheminVersDefaiteVisible 1 n
+e tentativeManquante conditionVisibiliteCheminVersDefaite ?1 n
+e debutInteractionSphinx reponses 1 n
+e sphinx debutInteractionSphinx 1 n
+e difficileInitialisation tentativePossedee 1 n
+e difficileInitialisation reussiteManquante 1 n
+e difficileInitialisation enigme 1 n
+e difficile difficileInitialisation 1 n
+e facileInitialisation tentativePossedee 5 n
+e facileInitialisation reussiteManquante 1 n
+e facileInitialisation enigme 1 n
+e facile facileInitialisation 1 n
+e victoire jeuGagne 1 n
+e succes victoire 1 n
+e transmissionAction3Vide enigme 1 n
+e transmissionAction3Vide tentativeManquante 1 n
+e tentativePossedee transmissionAction3Vide ?-2 n
+e action3 transmissionAction3Vide 1 n
+e tentativePossedee transmissionAction3Vide 1 n
+e transmissionAction3 enigme 1 n
+e tentativePossedee transmissionAction3 ?2 n
+e action3 transmissionAction3 1 n
+e tentativePossedee transmissionAction3 1 n
+e transmissionAction2 reussitePosedee 1 n
+e transmissionAction2 enigme 1 n
+e action2 transmissionAction2 1 n
+e reussiteManquante transmissionAction2 1 n
+e transmissionAction1Vide enigme 1 n
+e transmissionAction1Vide tentativeManquante 1 n
+e tentativePossedee transmissionAction1Vide ?-2 n
+e action1 transmissionAction1Vide 1 n
+e tentativePossedee transmissionAction1Vide 1 n
+e transmissionAction1 enigme 1 n
+e tentativePossedee transmissionAction1 ?2 n
+e action1 transmissionAction1 1 n
+e tentativePossedee transmissionAction1 1 n
+e reponsesAction3 action3 1 n
+e reponses reponsesAction3 1 n
+e reponsesAction2 action2 1 n
+e reponses reponsesAction2 1 n
+e reponsesAction1 action1 1 n
+e reponses reponsesAction1 1 n
+e debutSphinx sphinx 1 n
+e enigme debutSphinx 1 n
+e cheminVersSucces succes 1 n
+e cheminVersSuccesOuvert cheminVersSucces ?1 n
+e cheminVersSuccesVisible cheminVersSucces ?1 n
+e enigme cheminVersSucces 1 n
+e conditionVisibiliteCheminVersSucces cheminVersSuccesVisible 1 n
+e reussitePossedee conditionVisibiliteCheminVersSucces ?1 n
+h enigme small white bezier
+
+

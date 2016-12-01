@@ -31,7 +31,6 @@ jeu jeuEnigme {
 		ouvert
 		visibilite condition {
 			connaissancesPossedees reussite // On vérifie que le joueur possède une "reussite"
-			difficulte standard
 			hasard 0
 		}
 	}
@@ -44,9 +43,8 @@ jeu jeuEnigme {
 		ouvert
 		visibilite condition {
 			objetsManquants tentative // On vérifie que le joueur ne possède pas de "tentative"
-			difficulte standard
 			hasard 0
-		}
+		} 
 	}
 
 	explorateur joueur {
