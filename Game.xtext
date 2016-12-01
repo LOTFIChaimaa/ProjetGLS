@@ -95,7 +95,7 @@ Connaissance:
  */
 Personne:
 	'personne' name=ID '{'
-	    description=Description
+		description=Description
 		(obligatoire?='obligatoire')?
 		interaction=Interaction
 	'}'
@@ -241,8 +241,8 @@ Chemin:
  */
 Transmission:
 	'transmission' '{'
-		('objetsTransmis' (objets+=[Objet|ID])+)?
-		('objetsConsommes' (objets+=[Objet|ID])+)?
+		('objetsTransmis' (objetsTransmis+=[Objet|ID])+)?
+		('objetsConsommes' (objetsConsommes+=[Objet|ID])+)?
 		('connaissances' (connaissances+=[Connaissance|ID])+)?
 		(conditions+=Condition)*
 	'}'
