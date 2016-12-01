@@ -95,7 +95,7 @@ Connaissance:
  */
 Personne:
 	'personne' name=ID '{'
-	    description=Description
+		description=Description
 		(obligatoire?='obligatoire')?
 		interaction=Interaction
 	'}'
