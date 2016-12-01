@@ -1,6 +1,7 @@
 package game;
 
 import java.util.List;
+import java.util.Random;
 
 public class Condition {
 
@@ -57,5 +58,21 @@ public class Condition {
 
     public void setHasard(int h) {
         this.hasard = h;
+    }
+
+    /** Checks against the random chance for this condition to fail.
+     * @return boolean
+     *
+     * Return value is true if condition is meant to succeed, false if meant
+     * to fail.
+     */
+    public boolean checkHasard() {
+        Random r = new Random();
+        if (this.hasard == 100) {
+            return true;
+        }
+        else {
+            return (this.hasard > r.nextInt(100));
+        }
     }
 }
