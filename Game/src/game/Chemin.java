@@ -12,6 +12,5 @@ public class Chemin {
 	private boolean visible; // Indique si le chemin est visible
 	private List<Condition> conditionsVisibilite; // Les conditions de visibilité du chemin
 	private List<Condition> conditionsOuverture; // Les conditions d'ouverture du chemin
-	private 
 
 }
