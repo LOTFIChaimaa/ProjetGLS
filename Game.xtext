@@ -233,7 +233,7 @@ Chemin:
 
 /* Transmission
  *	Contient les objets et connaissances qui peuvent être transmis ou consommés durant le passage d'un chemin, ainsi que les conditions
- *	caractérisé par :
+ *	caractérisé par :	   
  *		- les objets qui peuvent être transmis/consommés lors du passage du chemin
  *		- les connaissances qui peuvent être transmises lors du passage du chemin
  *		- les conditions de la transmission et consommation d'objets et de connaissances
