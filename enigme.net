@@ -1,0 +1,37 @@
+tr conditionVisibiliteCheminVersSucces [0,w[ reussitePossedee?1 -> cheminVersSuccesVisible
+tr cheminVersSucces : chemin [0,w[ enigme cheminVersSuccesOuvert?1 cheminVersSuccesVisible?1 -> succes
+tr debutSphinx [0,w[ enigme -> sphinx
+tr reponsesAction1 [0,w[ reponses -> action1
+tr reponsesAction2 [0,w[ reponses -> action2
+tr reponsesAction3 [0,w[ reponses -> action3
+tr transmissionAction1 [0,w[ action1 tentativePossedee tentativePossedee?2 -> enigme
+tr transmissionAction1Vide [0,w[ action1 tentativePossedee tentativePossedee?-2 -> enigme tentativeManquante
+tr transmissionAction2 [0,w[ action2 reussiteManquante -> reussitePosedee enigme
+tr transmissionAction3 [0,w[ action3 tentativePossedee tentativePossedee?2 -> enigme
+tr transmissionAction3Vide [0,w[ action3 tentativePossedee tentativePossedee?-2 -> enigme tentativeManquante
+tr victoire [0,w[ succes -> jeuGagne
+tr facileInitialisation [0,w[ facile -> tentativePossedee*5 reussiteManquante enigme
+tr difficileInitialisation [0,w[ difficile -> tentativePossedee reussiteManquante enigme
+tr debutInteractionSphinx [0,w[ sphinx -> reponses
+tr conditionVisibiliteCheminVersDefaite [0,w[ tentativeManquante?1 -> cheminVersDefaiteVisible
+tr cheminVersDefaite : chemin [0,w[ enigme cheminVersDefaiteOuvert?1 cheminVersDefaiteVisible?1 -> echec
+tr standardInitialisation [0,w[ standard -> tentativePossedee*3 reussiteManquante enigme
+pl reussitePossedee : connaissance
+pl enigme : lieu
+pl cheminVersSuccesOuvert (1)
+pl succes : lieu
+pl sphinx : personne
+pl reponses : choix
+pl action1 : action
+pl action2 : action
+pl action3 : action
+pl tentativePossedee : objet
+pl reussiteManquante : connaissance
+pl facile : difficulte
+pl difficile : difficulte
+pl tentativeManquante : objet
+pl cheminVersDefaiteOuvert (1)
+pl echec : lieu
+pl standard : difficulte (1)
+net enigme
+
