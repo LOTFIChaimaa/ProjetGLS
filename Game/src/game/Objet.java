@@ -2,7 +2,7 @@ package game;
 
 import java.util.List;
 
-public class Objet {
+public class Objet extends Trouvable {
 
     private String name;
     private List<Description> descriptions;

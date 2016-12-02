@@ -2,21 +2,13 @@ package game;
 
 import java.util.List;
 
-/** Un Trouvable peut etre un Objet, une Connaissance ou une Personne.
+/** Un Trouvable est une entite que le joueur peut trouver dans un Lieu.
  * @author Noah Jay
  */
-public class Trouvable {
+public abstract class Trouvable {
 
-    private Object entite;
     private List<Condition> conditionsVisibilite;
     private List<Condition> conditionsActivation;
-
-    public Trouvable(Object entite, List<Condition> cv, List<Condition> ca) {
-        assert (entite instanceof Objet) || (entite instanceof Connaissance) ||
-                (entite instanceof Personne) :
-           "Un trouvable doit etre un Obejt, une Connaissance ou une Personne, pas un "
-               + entite.getClass();
-    }
 
     /** Check if this discoverable is visible by the player.
     * @param joueur Explorateur
@@ -44,5 +36,12 @@ public class Trouvable {
         }
 
         return true;
+    }
+
+    /** Function for filtering discoverables
+    * @return String
+    */
+    public String typeEntite() {
+        return this.getClass().getName();
     }
 }

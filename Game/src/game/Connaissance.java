@@ -2,7 +2,7 @@ package game;
 
 import java.util.List;
 
-public class Connaissance {
+public class Connaissance extends Trouvable {
 
     private String name; // Le nom de la connaissance
     private List<Description> descriptions; // Toutes les descriptions possibles de la connaissance

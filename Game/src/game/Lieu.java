@@ -1,6 +1,8 @@
 package game;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Lieu {
 
@@ -37,9 +39,9 @@ public class Lieu {
     }
 
     /** Get the correct description according to the player consulting it.
-     * @param player Explorateur
-     * @return Description
-     */
+    * @param player Explorateur
+    * @return Description
+    */
     public Description getDescription(Explorateur player) {
         for (Description d : this.descriptions) {
             if (d.check(player)) {
@@ -49,5 +51,26 @@ public class Lieu {
 
         throw new DescriptionError(this.name + " has no description for " +
                 player.getName());
+    }
+
+    /** Get all discoverables that are visible by the player.
+    * @param player Explorateur
+    * @return List<Trouvable>
+    */
+    public List<Trouvable> getTrouvablesVisibles(Explorateur player) {
+        return this.trouvables.stream()
+            .filter(tr -> tr.estVisible(player))
+            .collect(Collectors.toList());
+    }
+
+    /** Get all discoverables of a class that are visible by the player.
+    * @param player Explorateur
+    * @return List<Trouvable>
+    */
+    public List<?> getTrouvablesVisibles(Explorateur player, Class<?> entite) {
+        return this.trouvables.stream()
+            .filter(tr -> tr.estVisible(player))
+            .map(tr -> tr.typeEntite() == entite.getName())
+            .collect(Collectors.toList());
     }
 }

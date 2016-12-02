@@ -1,6 +1,6 @@
 package game;
 
-public class Personne {
+public class Personne extends Trouvable {
 
     private String name; // Le nom de la personne
     private Description description; // La description du personnage
