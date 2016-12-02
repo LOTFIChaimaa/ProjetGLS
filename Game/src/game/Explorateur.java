@@ -12,23 +12,20 @@ public class Explorateur {
     private List<Objet> objets; // Ses objets
     private Lieu lieuActuel; // Le lieu actuel du personnage
 
-    public Explorateur(String name, Difficulte difficulte, int tailleMax,
-            List<Connaissance> connaissances, List<Objet> objets, Lieu lieuActuel) {
+    public Explorateur(String name, int tailleMax, List<Connaissance> connaissances,
+            List<Objet> objets) {
         this.name = name;
-        this.difficulte = difficulte;
         this.tailleMax = tailleMax;
         this.tailleInventaire = 0;
         this.connaissances = connaissances;
-        this.objets = objets;
-        this.lieuActuel = lieuActuel;
 
-        for (Objet o : this.objets) {
-            this.tailleInventaire += o.getTaille();
-        }
-
-        if (this.tailleInventaire > this.tailleMax) {
-            throw new RuntimeException(this.name +
-                    " was given too many objects at initialization!");
+        for (Objet o : objets) {
+            try {
+                this.ajouterObjet(o);
+            } catch (InventorySpaceError e) {
+                throw new RuntimeException(this.name +
+                        " was given too many objects at initialization!");
+            }
         }
     }
 
