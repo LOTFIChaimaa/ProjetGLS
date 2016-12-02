@@ -72,8 +72,8 @@ public class Explorateur {
         }
 
         // Check that the required objects are not in inventory
-        for (Connaissance o : c.getConnaissancesManquants()) {
-            if (this.connaisasnces.contains(o)) {
+        for (Connaissance o : c.getConnaissancesManquantes()) {
+            if (this.connaissances.contains(o)) {
                 return false;
             }
         }
