@@ -38,4 +38,19 @@ public class Chemin {
 
         return true;
     }
+
+    /** Get the correct description according to the player consulting it.
+     * @param player Explorateur
+     * @return Description
+     */
+    public Description getDescription(Explorateur player) {
+        for (Description d : this.descriptions) {
+            if (d.check(player)) {
+                return d;
+            }
+        }
+
+        throw new DescriptionError(this.name + " has no description for " +
+                player.getName());
+    }
 }
