@@ -10,6 +10,17 @@ public class Chemin {
     private Lieu lieu2; // l'autre lieu relie par le chemin
     private List<Condition> conditionsVisibilite;
     private List<Condition> conditionsOuverture;
+    private List<Transmission> transmissions;
+
+    public Chemin(String name, Lieu l1, Lieu l2, List<Description> d,
+            List<Condition> cv, List<Condition> co, List<Transmission> t) {
+        this.name = name;
+        this.lieu1 = l1;
+        this.lieu2 = l2;
+        this.conditionsVisibilite = cv;
+        this.conditionsOuverture = co;
+        this.transmissions = t;
+    }
 
     /** Checks if the path is visible.
      * @param player Explorateur
@@ -52,5 +63,21 @@ public class Chemin {
 
         throw new DescriptionError(this.name + " has no description for " +
                 player.getName());
+    }
+
+    /** Get the valid trade (Transmission) for the player.
+     * @param player Explorateur
+     * @return Transmission
+     *
+     * Returns null if no trade is valid.
+     */
+    public Transmission getTransmission(Explorateur player) {
+        for (Transmission t : this.transmissions) {
+            if (t.check(player)) {
+                return t;
+            }
+        }
+
+        return null;
     }
 }
