@@ -26,7 +26,7 @@ Jeu:
 		objets+=Objet*
 		personnes+=Personne*
 		'lieuDepart' lieuDepart=[Lieu|ID]
-		'lieuArrivee' lieuArrivee=[Lieu|ID]
+		'lieuxArrivee' (lieuxArrivee+=[Lieu|ID])+
 	'}'
 ;
 
@@ -160,27 +160,14 @@ Objet:
 /* Tranformation
  *  Permet de gérer la transformation des objets
  * 	caractérisé par :
+ * 		- objet résultat
  * 		- conditions de la transformation
  * 		- résultats possibles
  */
 Transformation:
-	'transformation' '{'
+	'transformation' objet=Objet '{'
 		(conditions+=Condition)
-		(resultats+=Resultat)+
 	'}'
-;
-
-/* Resultat
- *	résultat possible d'une transformation d'objet
- *	caractérisé par :
- * 		- objet résultat
- * 		- conditions d'obtention
- */
-Resultat:
-  'resultat' '{'
-    'objet' objet=Objet
-    (conditions+=Condition)*
-  '}'
 ;
 
 /* Lieu
@@ -262,9 +249,13 @@ Condition:
 		('objetsManquants' (objetsManquants+=[Objet|ID])+)?
 		('connaissancesPossedees' (connaissancesPossedees+=[Connaissance|ID])+)?
 		('connaissancesManquantes' (connaissancesManquantes+=[Connaissance|ID])+)?
-		'difficulte' difficulte=[Difficulte|ID]
+		('difficulte' difficulte=[Difficulte|ID])?
 		'hasard' hasard=INT
 	'}'
+;
+
+TrouvableKey:
+	Connaissance | Objet | Personne
 ;
 
 /* Trouvable

@@ -113,5 +113,5 @@ jeu jeuEnigme {
 	}
 	
 	lieuDepart enigme
-	lieuArrivee succes
+	lieuxArrivee succes
 }

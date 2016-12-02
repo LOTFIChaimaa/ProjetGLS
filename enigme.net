@@ -2,7 +2,8 @@ tr debutSphinx [0,w[ enigme tentativePossedee?1 reussiteManquante?1 -> sphinx
 tr reponsesAction1 [0,w[ reponses -> action1
 tr reponsesAction2 [0,w[ reponses -> action2
 tr reponsesAction3 [0,w[ reponses -> action3
-tr victoire [0,w[ succes -> jeuGagne
+tr victoire [0,w[ succes -> jeuTermine
+tr defaite [0,w[ echec -> jeuTermine
 tr facileInitialisation [0,w[ facile -> tentativePossedee*5 reussiteManquante enigme
 tr debutInteractionSphinx [0,w[ sphinx -> reponses
 tr cheminVersDefaite : chemin [0,w[ enigme tentativeManquante?1 -> echec
@@ -29,5 +30,6 @@ pl echec : lieu
 pl standard : difficulte (1)
 pl difficile : difficulte
 pl reussitePossedee : connaissance
+pl jeuTermine
 net enigme
 
