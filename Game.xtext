@@ -275,7 +275,7 @@ Condition:
  * 		- conditions d'activation
  */
 Trouvable:
- 	('connaissance' concerne=[Connaissance|ID] | 'objet' concerne=[Objet|ID] | 'personne' concerne=[Personne|ID]) '{'
+ 	('connaissance' entite=[Connaissance|ID] | 'objet' entite=[Objet|ID] | 'personne' entite=[Personne|ID]) '{'
  		(visible?='visible')?
  		('visibilite' (conditionsVisibilite+=Condition)+)?
  		(actif?='actif')?
@@ -286,11 +286,11 @@ Trouvable:
 /* Deposable
  *  désigne un objet pouvant être dépose dans un lieu
  * caractérisé par :
- * 		- objet concerné
+ * 		- l'entité concernée
  * 		- conditions nécessaires
  */
 Deposable:
-	'deposable' concerne=[Objet|ID] '{'
+	'deposable' entite=[Objet|ID] '{'
 		(conditions+=Condition)
 	'}'
 ;
