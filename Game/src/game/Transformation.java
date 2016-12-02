@@ -5,19 +5,19 @@ import java.util.List;
 public class Transformation {
 
     private List<Condition> conditions; // Conditions pour realiser la transformation
-    private List<Resultat> resultats; // Resultats possibles de la transformation
+    private Objet resultat; 
 
-    public Transformation(List<Condition> conditions, List<Resultat> resultats) {
+    public Transformation(List<Condition> conditions, Objet resultat) {
         this.conditions = conditions;
-        this.resultats = resultats;
+        this.resultat = resultat;
     }
 
     public List<Condition> getConditions() {
         return conditions;
     }
 
-    public List<Resultat> getResultats() {
-        return resultats;
+    public Objet getResultat() {
+        return resultat;
     }
 
     /** Checks if the transformation can be applied.

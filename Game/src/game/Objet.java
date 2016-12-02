@@ -68,22 +68,8 @@ public class Objet extends Trouvable {
         if (validTransfo == null) {
             return null;
         }
-        // Find a valid result of that transformation
         else {
-            Resultat validResult = null;
-            for (Resultat r : validTransfo.getResultats()) {
-                if (r.check(player)) {
-                    validResult = r;
-                    break;
-                }
-            }
-
-            if (validResult == null) {
-                return null;
-            }
-            else {
-                return validResult.getObjet();
-            }
+            return validTransfo.getResultat();
         }
     }
 
