@@ -2,12 +2,21 @@ package game;
 
 import java.util.List;
 
+/** Un Trouvable peut etre un Objet, une Connaissance ou une Personne.
+ * @author Noah Jay
+ */
 public class Trouvable {
 
-    // l'entite contenue peut etre un Objet, une Connaissance ou une Personne
     private Object entite;
     private List<Condition> conditionsVisibilite;
     private List<Condition> conditionsActivation;
+
+    public Trouvable(Object entite, List<Condition> cv, List<Condition> ca) {
+        assert (entite instanceof Objet) || (entite instanceof Connaissance) ||
+                (entite instanceof Personne) :
+           "Un trouvable doit etre un Obejt, une Connaissance ou une Personne, pas un "
+               + entite.getClass();
+    }
 
     /** Check if this discoverable is visible by the player.
     * @param joueur Explorateur
