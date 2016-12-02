@@ -7,6 +7,7 @@ public class Explorateur {
     private String name; // Son nom
     private Difficulte difficulte; // La difficulté actuelle
     private int tailleMax; // La taille max de l'inventaire
+    private int tailleInventaire; // La taille actuelle de l'inventaire
     private List<Connaissance> connaissances; // Ses connaissances
     private List<Objet> objets; // Ses objets
     private Lieu lieuActuel; // Le lieu actuel du personnage
@@ -16,9 +17,19 @@ public class Explorateur {
         this.name = name;
         this.difficulte = difficulte;
         this.tailleMax = tailleMax;
+        this.tailleInventaire = 0;
         this.connaissances = connaissances;
         this.objets = objets;
         this.lieuActuel = lieuActuel;
+
+        for (Objet o : this.objets) {
+            this.tailleInventaire += o.getTaille();
+        }
+
+        if (this.tailleInventaire > this.tailleMax) {
+            throw new RuntimeException(this.name +
+                    " was given too many objects at initialization!");
+        }
     }
 
     public String getName() {
@@ -37,12 +48,40 @@ public class Explorateur {
         return connaissances;
     }
 
+    public void ajouterConnaissance(Connaissance c) {
+        this.connaissances.add(c);
+    }
+
     public List<Objet> getObjets() {
         return objets;
     }
 
+    /** Add an object to the player's inventory.
+     * @param o Objet
+     * Raises an InventorySpaceError if player's inventory does not have enough
+     * space.
+     */
+    public void ajouterObjet(Objet o) throws InventorySpaceError {
+        if (this.tailleInventaire + o.getTaille() > this.tailleMax) {
+            throw new InventorySpaceError(this.name +
+                " can't acquire " + o.getName() + " : not enough inventory space.");
+        } else {
+            this.objets.add(o);
+            this.tailleInventaire += o.getTaille();
+        }
+    }
+
+    public void retirerObjet(Objet o) {
+        this.objets.remove(o);
+        this.tailleInventaire -= o.getTaille();
+    }
+
     public Lieu getLieuActuel() {
         return lieuActuel;
+    }
+
+    public void setLieuActuel(Lieu l) {
+        this.lieuActuel = l;
     }
 
     /** Checks if the given condition is fulfilled

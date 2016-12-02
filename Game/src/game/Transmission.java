@@ -41,4 +41,25 @@ public class Transmission {
 
         return true;
     }
+
+    /** Makes the trade.
+     * @param player Explorateur
+     * This should only be called if the trade is valid!
+     */
+    public void transmettre(Explorateur player) throws InventorySpaceError {
+        // Remove consumed objects
+        for (Objet o : this.objetsConsommes) {
+            player.retirerObjet(o);
+        }
+
+        // Give player objects
+        for (Objet o : this.objetsTransmis) {
+            player.ajouterObjet(o);
+        }
+
+        // Give player knowledge
+        for (Connaissance c : this.connaissances) {
+            player.ajouterConnaissance(c);
+        }
+    }
 }
