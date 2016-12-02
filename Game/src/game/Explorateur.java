@@ -24,7 +24,7 @@ public class Explorateur {
                 this.ajouterObjet(o);
             } catch (InventorySpaceError e) {
                 throw new RuntimeException(this.name +
-                        " was given too many objects at initialization!");
+                    " was given too many objects at initialization!\n" + e.getMessage());
             }
         }
     }
@@ -33,14 +33,19 @@ public class Explorateur {
      * @param l Lieu
      * @param d Difficulte
      */
-    public void init(Lieu l, Difficulte d) throws InventorySpaceError {
+    public void init(Lieu l, Difficulte d) {
         this.lieuActuel = l;
         this.difficulte = d;
         this.connaissances = this.difficulte.getConnaissances();
 
         // Starting objects
         for (Objet o : this.difficulte.getObjets()) {
-            this.ajouterObjet(o);
+            try {
+                this.ajouterObjet(o);
+            } catch (InventorySpaceError e) {
+                throw new RuntimeException(this.name +
+                    " was given too many objects at initialization!\n" + e.getMessage());
+            }
         }
     }
 
