@@ -86,9 +86,22 @@ public class Explorateur {
         }
     }
 
+    /** Remove an object from the player's inventory
+     * @param o Objet
+     */
     public void retirerObjet(Objet o) {
         this.objets.remove(o);
         this.tailleInventaire -= o.getTaille();
+    }
+
+    /** Deposit an object from a player's inventory to a location.
+     * @param o Objet
+     */
+    public void deposer(Objet o) {
+        if (o.estDeposable(this)) {
+            this.objets.add(o);
+            this.retirerObjet(o);
+        }
     }
 
     public Lieu getLieuActuel() {

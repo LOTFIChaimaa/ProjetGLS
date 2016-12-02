@@ -12,6 +12,7 @@ public class Objet extends Trouvable {
     private boolean deposable;
     private Map<String, List<Condition>> conditionsDeposable;
 
+    /** Basic constructor */
     public Objet(String name, List<Description> descriptions,
             List<Transformation> transformations, int taille) {
         this.name = name;
@@ -21,6 +22,7 @@ public class Objet extends Trouvable {
         this.deposable = false;
     }
 
+    /** Object that can be deposited in at least one location */
     public Objet(String name, List<Description> descriptions, List<Transformation> transformations,
             int taille, Map<String, List<Condition>> cd) {
         this(name, descriptions, transformations, taille);
@@ -106,7 +108,9 @@ public class Objet extends Trouvable {
      */
     public boolean estDeposable(Explorateur player) {
         if (this.deposable) {
-            for (Condition c : this.conditionsDeposable.get(player.getLieuActuel())) {
+            for (Condition c :
+                    this.conditionsDeposable.get(player.getLieuActuel().getName()))
+            {
                 if (!player.check(c)) {
                     return false;
                 }
