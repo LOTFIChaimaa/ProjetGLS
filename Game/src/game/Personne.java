@@ -1,28 +1,52 @@
 package game;
 
+import java.util.List;
+
 public class Personne extends Trouvable {
 
     private String name; // Le nom de la personne
     private Description description; // La description du personnage
-    private boolean obligatoire; // Indique si la personne est obligatoire
     private Interaction interaction; // L'interraction avec le personnage
+    private boolean obligatoire;
+    private List<Condition> conditionsObligation;
 
-    public Personne(String name, Description description, boolean obligatoire, Interaction interaction) {
+    /** Simple constructor */
+    public Personne(String name) {
+        this.name = name;
+    }
+
+    /** Complete constructor */
+    public Personne(String name, Description description, Interaction interaction, boolean obligatoire) {
         this.name = name;
         this.description = description;
-        this.obligatoire = obligatoire;
         this.interaction = interaction;
+        this.obligatoire = obligatoire;
     }
     public String getName() {
         return name;
     }
+
     public Description getDescription() {
         return description;
     }
-    public boolean isObligatoire() {
-        return obligatoire;
+
+    public void setDescription(Description d) {
+        this.description = d;
     }
+
     public Interaction getInteraction() {
         return interaction;
+    }
+
+    public void setInteraction(Interaction i) {
+        this.interaction = i;
+    }
+
+    public boolean estObligatoire() {
+        return this.obligatoire;
+    }
+
+    public void setObligatoire(boolean value) {
+        this.obligatoire = value;
     }
 }
