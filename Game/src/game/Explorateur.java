@@ -102,8 +102,14 @@ public class Explorateur {
     /** Checks if the given condition is fulfilled
      * @param c Condition
      * @return boolean
+     * If there is no condition (c == null) then it passes.
      */
     public boolean check(Condition c) {
+        // If there is no condiditon then it passes 
+        if (c == null) {
+            return true;
+        }
+
         // Check that we're on the correct difficulty
         if (this.difficulte.getName() != c.getDifficulte().getName()) {
             return false;
