@@ -11,7 +11,7 @@ public class Deposable {
      * @param player Explorateur
      * @return boolean
      */
-    public boolean check(Explorateur player) {
+    public boolean estDeposable(Explorateur player) {
         for (Condition c : this.conditions) {
             if (!player.check(c)) {
                 return false;
