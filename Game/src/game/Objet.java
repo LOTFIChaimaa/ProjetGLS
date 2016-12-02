@@ -1,6 +1,7 @@
 package game;
 
 import java.util.List;
+import java.util.Map;
 
 public class Objet extends Trouvable {
 
@@ -8,6 +9,8 @@ public class Objet extends Trouvable {
     private List<Description> descriptions;
     private List<Transformation> transformations;
     private int taille;
+    private boolean deposable;
+    private Map<String, List<Condition>> conditionsDeposable;
 
     public Objet(String name, List<Description> descriptions,
             List<Transformation> transformations, int taille) {
@@ -15,6 +18,14 @@ public class Objet extends Trouvable {
         this.descriptions = descriptions;
         this.transformations = transformations;
         this.taille = taille;
+        this.deposable = false;
+    }
+
+    public Objet(String name, List<Description> descriptions, List<Transformation> transformations,
+            int taille, Map<String, List<Condition>> cd) {
+        this(name, descriptions, transformations, taille);
+        this.deposable = true;
+        this.conditionsDeposable = cd;
     }
 
     public String getName() {
@@ -87,5 +98,24 @@ public class Objet extends Trouvable {
 
         throw new DescriptionError(this.name + " has no description for " +
                 player.getName());
+    }
+
+    /** Checks if the object can be deposited.
+     * @param player Explorateur
+     * @return boolean
+     */
+    public boolean estDeposable(Explorateur player) {
+        if (this.deposable) {
+            for (Condition c : this.conditionsDeposable.get(player.getLieuActuel())) {
+                if (!player.check(c)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

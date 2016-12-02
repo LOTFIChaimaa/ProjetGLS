@@ -10,15 +10,15 @@ public class Lieu {
     private List<Description> descriptions;
     // Les objets, personnes ou connaissance trouvables dans le lieu
     private List<Trouvable> trouvables;
-    private List<Deposable> deposables; // Les objets déposés dans le lieu
+    private List<Objet> objets; // Les objets déposés dans le lieu
     private List<Chemin> cheminsPossibles; // Les chemins possibles reliés au lieu
     private List<Chemin> cheminsObligatoires; // Les chemins obligatoires reliés au lieu
 
-    public Lieu(String name, List<Trouvable> trouvables, List<Deposable> deposables,
+    public Lieu(String name, List<Trouvable> trouvables, List<Objet> objets,
             List<Chemin> cheminsPossibles, List<Chemin> cheminsObligatoires) {
         this.name = name;
         this.trouvables = trouvables;
-        this.deposables = deposables;
+        this.objets = objets;
         this.cheminsPossibles = cheminsPossibles;
         this.cheminsObligatoires = cheminsObligatoires;
     }
@@ -28,8 +28,8 @@ public class Lieu {
     public List<Trouvable> getTrouvables() {
         return trouvables;
     }
-    public List<Deposable> getDeposables() {
-        return deposables;
+    public List<Objet> getObjets() {
+        return objets;
     }
     public List<Chemin> getCheminsPossibles() {
         return cheminsPossibles;
