@@ -1,0 +1,3 @@
+[] <> (action2 => jeuGagne); # Toujours, la bonne réponse amène à la victoire
+[] <> (jeuGagne \/ echec); # Toujours, soit on gagne, soit on atteint echec
+- <> (succes /\ echec); # Jamais, on ne peut être dans succes et echec simultanément
