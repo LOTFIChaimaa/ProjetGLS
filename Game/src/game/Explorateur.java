@@ -32,6 +32,21 @@ public class Explorateur {
         }
     }
 
+    /** Initializes the player to the given settings.
+     * @param l Lieu
+     * @param d Difficulte
+     */
+    public void init(Lieu l, Difficulte d) throws InventorySpaceError {
+        this.lieuActuel = l;
+        this.difficulte = d;
+        this.connaissances = this.difficulte.getConnaissances();
+
+        // Starting objects
+        for (Objet o : this.difficulte.getObjets()) {
+            this.ajouterObjet(o);
+        }
+    }
+
     public String getName() {
         return name;
     }
