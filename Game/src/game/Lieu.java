@@ -10,30 +10,57 @@ public class Lieu {
     private List<Description> descriptions;
     // Les objets, personnes ou connaissance trouvables dans le lieu
     private List<Trouvable> trouvables;
-    private List<Objet> objets; // Les objets déposés dans le lieu
     private List<Chemin> cheminsPossibles; // Les chemins possibles reliés au lieu
     private List<Chemin> cheminsObligatoires; // Les chemins obligatoires reliés au lieu
 
-    public Lieu(String name, List<Trouvable> trouvables, List<Objet> objets,
-            List<Chemin> cheminsPossibles, List<Chemin> cheminsObligatoires) {
+    /** Simple constructor. */
+    public Lieu(String name) {
+        this.name = name;
+    }
+
+    /** Complete constructor. */
+    public Lieu(String name, List<Trouvable> trouvables, List<Chemin> cheminsPossibles,
+            List<Chemin> cheminsObligatoires) {
         this.name = name;
         this.trouvables = trouvables;
-        this.objets = objets;
         this.cheminsPossibles = cheminsPossibles;
         this.cheminsObligatoires = cheminsObligatoires;
     }
+
     public String getName() {
         return name;
     }
+
     public List<Trouvable> getTrouvables() {
         return trouvables;
     }
-    public List<Objet> getObjets() {
-        return objets;
+
+    public void addTrouvable(Trouvable t) {
+        this.trouvables.add(t);
     }
+
     public List<Chemin> getCheminsPossibles() {
         return cheminsPossibles;
     }
+
+    public void addCheminPossible(Chemin ch) {
+        this.cheminsPossibles.add(ch);
+    }
+
+    /** Adds a mandatory path.
+     * @param ch Chemin
+     *
+     * Path is also registered in cheminsPossibles if not already.
+     */
+    public void addCheminObligatoire(Chemin ch) {
+        this.cheminsObligatoires.add(ch);
+    
+        // Add to cheminsPossibles if not already in
+        if (!this.cheminsPossibles.contains(ch)) {
+            this.cheminsPossibles.add(ch);
+        }
+    }
+
     public List<Chemin> getCheminsObligatoires() {
         return cheminsObligatoires;
     }
@@ -51,6 +78,10 @@ public class Lieu {
 
         throw new DescriptionError(this.name + " has no description for " +
                 player.getName());
+    }
+
+    public void addDescription(Description d) {
+        this.descriptions.add(d);
     }
 
     /** Get all discoverables that are visible by the player.
