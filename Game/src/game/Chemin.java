@@ -12,14 +12,45 @@ public class Chemin {
     private List<Condition> conditionsOuverture;
     private List<Transmission> transmissions;
 
+    /** Simple constructor */
+    public Chemin(String name) {
+        this.name = name;
+    }
+
+    /** Complete constructor */
     public Chemin(String name, Lieu l1, Lieu l2, List<Description> d,
             List<Condition> cv, List<Condition> co, List<Transmission> t) {
         this.name = name;
         this.lieu1 = l1;
         this.lieu2 = l2;
+        this.descriptions = d;
         this.conditionsVisibilite = cv;
         this.conditionsOuverture = co;
         this.transmissions = t;
+    }
+
+    public void addLieu1(Lieu l) {
+        this.lieu1 = l;
+    }
+
+    public void addLieu2(Lieu l) {
+        this.lieu2 = l;
+    }
+
+    public void addDescription(Description d) {
+        this.descriptions.add(d);
+    }
+
+    public void addConditionVisibilite(Condition c) {
+        this.conditionsVisibilite.add(c);
+    }
+
+    public void addConditionOuverture(Condition c) {
+        this.conditionsOuverture.add(c);
+    }
+
+    public void addTransmission(Transmission t) {
+        this.transmissions.add(t);
     }
 
     /** Checks if the path is visible.
