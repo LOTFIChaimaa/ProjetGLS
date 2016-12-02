@@ -7,6 +7,12 @@ public class Connaissance extends Trouvable {
     private String name; // Le nom de la connaissance
     private List<Description> descriptions; // Toutes les descriptions possibles de la connaissance
 
+    /** Simple constructor */
+    public Connaissance(String name) {
+        this.name = name;
+    }
+
+    /** Complete constructor */
     public Connaissance(String name, List<Description> descriptions) {
         this.name = name;
         this.descriptions = descriptions;
