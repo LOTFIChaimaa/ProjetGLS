@@ -1,6 +1,7 @@
 package game;
 
 import java.util.List;
+import java.util.ArrayList;
 
 /** Classe définissant le jeu
  * Contient la plus part des éléments qui seront contenues dans le jeu
@@ -72,5 +73,19 @@ public class Jeu {
 
     public Lieu getLieuArrivee() {
         return lieuArrivee;
+    }
+
+    /** Initialize the player to a certain difficulty.
+     * @param d Difficulte
+     */
+    public void initJoueur(Difficulte d) {
+        this.joueur.init(this.lieuDepart, d);
+    }
+
+    /** Main game loop. */
+    public void jouer() {
+        while (this.joueur.getLieuActuel() != this.lieuArrivee) {
+            continue;
+        }
     }
 }
