@@ -286,11 +286,11 @@ Trouvable:
 /* Deposable
  *  désigne un objet pouvant être dépose dans un lieu
  * caractérisé par :
- * 		- l'entité concernée
+ * 		- l'objet concerné
  * 		- conditions nécessaires
  */
 Deposable:
-	'deposable' entite=[Objet|ID] '{'
+	'deposable' objet=[Objet|ID] '{'
 		(conditions+=Condition)
 	'}'
 ;
