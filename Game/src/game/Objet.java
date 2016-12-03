@@ -12,7 +12,12 @@ public class Objet extends Trouvable {
     private boolean deposable;
     private Map<String, List<Condition>> conditionsDeposable;
 
-    /** Basic constructor */
+    /** Simple constructor */
+    public Objet(String name) {
+        this.name = name;
+    }
+
+    /** Object */
     public Objet(String name, List<Description> descriptions,
             List<Transformation> transformations, int taille) {
         this.name = name;
@@ -38,8 +43,16 @@ public class Objet extends Trouvable {
         return descriptions;
     }
 
+    public void addDescription(Description d) {
+        this.descriptions.add(d);
+    }
+
     public List<Transformation> getTransformations() {
         return transformations;
+    }
+
+    public void addTransformation(Transformation t) {
+        this.transformations.add(t);
     }
 
     public int getTaille() {
