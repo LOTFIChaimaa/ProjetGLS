@@ -7,6 +7,12 @@ public class Description {
     private String texte; // La description
     private List<Condition> conditions; // Les conditions nécessaires pour afficher la description
 
+    /** Simple constructor */
+    public Description(String texte) {
+        this.texte = texte;
+    }
+
+    /** Complete constructor */
     public Description(String texte, List<Condition> conditions) {
         this.texte = texte;
         this.conditions = conditions;
@@ -18,6 +24,10 @@ public class Description {
 
     public List<Condition> getConditions() {
         return conditions;
+    }
+
+    public void addCondition(Condition c) {
+        this.conditions.add(c);
     }
 
     /** Checks if the description is valid/active for the given player.
