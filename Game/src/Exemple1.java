@@ -44,12 +44,6 @@ public class Exemple1 {
         // echec = new Lieu("Echec", trouvablesEchec, new ArrayList<Chemin>(), null);
 
 
-        cheminEchec = new Chemin("Chemin vers l'Echec", enigme, echec,
-                descCheminEchec, condCheminEchec, new ArrayList<Condition>(),
-                new ArrayList<Transmission>());
-        cheminSuccess = new Chemin("Chemin vers le Success", enigme, echec,
-                descCheminSuccess, condCheminSuccess, new ArrayList<Condition>(),
-                new ArrayList<Transmission>());
 
         List<Lieu> lieux = new ArrayList<Lieu>();
         lieux.add(enigme);
