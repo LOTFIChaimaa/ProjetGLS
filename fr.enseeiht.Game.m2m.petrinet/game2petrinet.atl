@@ -1,0 +1,12 @@
+module game2petrinet;
+create OUT: petrinet from  IN: game;
+
+rule Jeu2Petrinet{
+	from g: game!Jeu
+	to p:petrinet!Reseau(
+		nom <- g.name,
+		elements <- g.all
+		)
+	
+	
+}
