@@ -1,3 +1,0 @@
-module game2petrinet;
-create OUT: petrinet from  IN: game;
-

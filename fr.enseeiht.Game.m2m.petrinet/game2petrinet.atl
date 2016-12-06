@@ -1,6 +1,7 @@
 module game2petrinet;
 create OUT: petrinet from  IN: game;
 
+-- A finir le jeu n'est pas termine
 rule Jeu2Petrinet{
 	from g: game!Jeu
 	to p:petrinet!Reseau(
@@ -9,4 +10,32 @@ rule Jeu2Petrinet{
 		)
 	
 	
+}
+
+rule Description2Petrinet{
+	from d: game!Description
+	to
+		--Place
+		p_valide: petrinet!Place(nom <- d.texte, jetons <- 0),
+		p_invalide: petrinet!Place(nom <- d.texte, jetons <- 1),
+		
+		--Transition
+		t_condVerifie: petrinet!Transition(nom <- 'Condition verifiée'),
+		t_condNonVerifie: petrinet!Transition(nom <- 'Condition non verifiée'),
+		
+		--Arc
+		a_cv2dv: petrinet!ArcEntrant(nbJetons <- 1, successeur <- p_valide, predecesseur <- t_condVerifie), --Condition verifiée 2 description valide
+		a_cnv2di: petrinet!ArcEntrant(nbJetons <- 1, successeur <- p_invalide, predecesseur <- t_condNonVerifie), --Condition non verifiée 2 description invalide
+		a_dv2cnv: petrinet!ArcSortant(nbJeton <- 1, successeur <- t_condNonVerifie, predecesseur <- p_valide),
+		a_di2cv: petrinet!ArcSortant(nbJeton <- 1, successeur <- t_condVerifie, predecesseur <- p_invalide),
+		
+		--Transition
+		t_condVerifie(predecesseurs <- a_di2cv, successeurs <- a_cv2dv),
+		t_condNonVerifie(predecesseurs <- a_dv2cnv, successeurs <- a_cnv2di)
+		
+		-- Il faut modeliser les conditions
+}
+
+rule Difficulte2Petrinet{
+	from d: Difficulte
 }
