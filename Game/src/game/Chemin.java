@@ -29,6 +29,18 @@ public class Chemin {
         this.transmissions = t;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Lieu getLieu1() {
+        return lieu1;
+    }
+
+    public Lieu getLieu2() {
+        return lieu2;
+    }
+
     public void addLieu1(Lieu l) {
         this.lieu1 = l;
     }
@@ -54,7 +66,6 @@ public class Chemin {
     }
 
     /** Checks if the path is visible.
-     * @param player Explorateur
      * @return boolean
      */
     public boolean estVisible(Explorateur player) {

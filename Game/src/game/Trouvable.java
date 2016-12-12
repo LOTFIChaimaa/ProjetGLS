@@ -11,7 +11,7 @@ public abstract class Trouvable {
     private List<Condition> conditionsActivation;
 
     /** Check if this discoverable is visible by the player.
-    * @param joueur Explorateur
+    * @param player Explorateur
     * @return boolean
     */
     public boolean estVisible(Explorateur player) {
@@ -25,7 +25,7 @@ public abstract class Trouvable {
     }
 
     /** Check if the player can interact with this discoverable.
-    * @param joueur Explorateur
+    * @param player Explorateur
     * @return boolean
     */
     public boolean estActif(Explorateur player) {

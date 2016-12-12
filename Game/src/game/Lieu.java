@@ -104,4 +104,18 @@ public class Lieu {
             .map(tr -> tr.typeEntite() == entite.getName())
             .collect(Collectors.toList());
     }
+
+    /** Take an objet in the place
+     * @param objet objet to take
+     */
+    public void prendreObjet(Objet objet) {
+        trouvables.remove(objet);
+    }
+
+    /** Depose an objet in the place
+     * @param objet objet to depose
+     */
+    public void deposerObjet(Objet objet) {
+        trouvables.add(objet);
+    }
 }

@@ -57,6 +57,10 @@ public class Explorateur {
         return difficulte;
     }
 
+    public int getTailleInventaire() {
+        return tailleInventaire;
+    }
+
     public int getTailleMax() {
         return tailleMax;
     }
