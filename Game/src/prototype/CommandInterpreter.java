@@ -184,6 +184,28 @@ public class CommandInterpreter {
                     }
                     break;
                 case "utiliser":
+                    Optional<Chemin> chemin = findCurrentPlaceChemin(command.getWord(1));
+                    if (!chemin.isPresent()) {
+                        System.out.println("'" + command.getWord(1) + "' n'est pas présent dans le lieu!");
+                    }
+                    else {
+                        // We process to the transmission :
+                        Transmission transmission = chemin.get().getTransmission(explorateur);
+                        if (transmission.check(explorateur)) {
+                            try {
+                                transmission.transmettre(explorateur);
+                            } catch (InventorySpaceError e) {
+                                System.out.println("Impossible de transferer l'objet" + e.getErrorObjet() + "L'inventaire est plein !");
+                            }
+                        }
+                        // We set the correct place for the player (i.e. the correct end of the path) :
+                        if (chemin.get().getLieu1().getName().equals( explorateur.getLieuActuel() )) {
+                            explorateur.setLieuActuel( chemin.get().getLieu2() );
+                        }
+                        else {
+                            explorateur.setLieuActuel( chemin.get().getLieu1() );
+                        }
+                    }
                     break;
                 ////////////// INTERACTION //////////////
                 case "interagir":
