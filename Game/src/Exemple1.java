@@ -48,6 +48,7 @@ public class Exemple1 {
 
         // Transmissions
         Transmission transmissionReussite = new Transmission();
+        Transmission transmissionEchec = new Transmission();
 
         // Choix
         Choix reponseJoueur = new Choix("Reponse a la question du sphinxe");
@@ -73,6 +74,11 @@ public class Exemple1 {
         lieux.add(enigme);
         lieux.add(succes);
         lieux.add(echec);
+
+        transmissionEchec.addObjetConsomme(tentative);
+        transmissionReussite.addObjetConsomme(tentative);
+        mauvaiseReponse.addTransmission(transmissionEchec);
+        bonneReponse.addTransmission(transmissionReussite);
 
         List<Chemin> chemins = new ArrayList<Chemin>();
         List<Difficulte> difficultes = new ArrayList<Difficulte>();
