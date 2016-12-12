@@ -1,5 +1,18 @@
 import game.*;
 
+import game.Jeu;
+import game.Difficulte;
+import game.Explorateur;
+import game.Lieu;
+import game.Chemin;
+import game.Objet;
+import game.Connaissance;
+import game.Personne;
+import game.Description;
+import game.Interaction;
+import game.Choix;
+import game.Action;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -8,55 +21,58 @@ public class Exemple1 {
 
     /** Game exexcution. */
     public static void main(String args[]) {
+        /* Variable Declaration */
         String name = "Enigmes";
 
         // Lieux
         Lieu enigme = new Lieu("Enigme");
-        Lieu success = new Lieu("Success");
+        Lieu succes = new Lieu("Succes");
         Lieu echec = new Lieu("Echec");
 
         // Chemins
         Chemin cheminEchec = new Chemin("Chemin vers l'Echec");
-        Chemin cheminSuccess= new Chemin("Chemin vers le Success");
-        List<Chemin> cheminsEnigme;
+        Chemin cheminSucces= new Chemin("Chemin vers le Succes");
 
         // Trouvables
         Personne sphinxe = new Personne("Sphinxe");
         Connaissance reussite = new Connaissance("Reussite");
-        List<Trouvable> trouvablesEnigme;
-        List<Trouvable> trouvablesSuccess;
-        List<Trouvable> trouvablesEchec;
+        Objet tentative = new Objet("Tentative");
 
         // Descriptions
-        List<Description> descEnigme;
-        List<Description> descEchec;
-        List<Description> descSuccess;
-        List<Description> descCheminEchec;
-        List<Description> descCheminSuccess;
+        Description descSphinxe = new Description("Le Sphinxe vous demande:\n"
+                + "Qui se deplace sur 4 jambes le matin, 2 jambes a midi et 3"
+                + "jambes le soir?");
+
+        // Interactions
+        Interaction interactionSphinxe = new Interaction();
+
+        // Transmissions
+        Transmission transmissionReussite = new Transmission();
+
+        // Choix
+        Choix reponseJoueur = new Choix("Reponse a la question du sphinxe");
+
+        // Actions
+        Action bonneReponse = new Action();
+        Action mauvaiseReponse = new Action();
 
         // Conditions
-        List<Condition> condCheminEchec;
-        List<Condition> condCheminSuccess;
+        Condition conditionVisiCheminEchec = new Condition();
+        Condition conditionVisiCheminSucces = new Condition();
 
-        // Init game world
-        // enigme = new Lieu("Enigme", trouvablesEnigme, cheminsEnigme, null);
-        // success = new Lieu("Success", trouvablesSuccess, new ArrayList<Chemin>(), null);
-        // echec = new Lieu("Echec", trouvablesEchec, new ArrayList<Chemin>(), null);
+        /* Init game world */
+        cheminEchec.addLieu1(enigme);
+        cheminEchec.addLieu2(echec);
+        cheminSucces.addLieu1(enigme);
+        cheminSucces.addLieu2(succes);
 
-
-        cheminEchec = new Chemin("Chemin vers l'Echec", enigme, echec,
-                descCheminEchec, condCheminEchec, new ArrayList<Condition>(),
-                new ArrayList<Transmission>());
-        cheminSuccess = new Chemin("Chemin vers le Success", enigme, echec,
-                descCheminSuccess, condCheminSuccess, new ArrayList<Condition>(),
-                new ArrayList<Transmission>());
+        enigme.addCheminObligatoire(cheminEchec);
+        enigme.addCheminObligatoire(cheminSucces);
 
         List<Lieu> lieux = new ArrayList<Lieu>();
         lieux.add(enigme);
-        lieux.add(success);
+        lieux.add(succes);
         lieux.add(echec);
-
-        Objet tentative = new Objet("Tentative", null, null, 0);
 
         List<Chemin> chemins = new ArrayList<Chemin>();
         List<Difficulte> difficultes = new ArrayList<Difficulte>();

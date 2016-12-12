@@ -7,6 +7,10 @@ public class Interaction {
     private List<Transmission> transmissions; // Les transmissions possibles de l'intéraction
     private List<Choix> choix; // Tous les choix possibles de l'intéraction
 
+    /** Simple constructor */
+    public Interaction() {};
+
+    /** Complete constructor */
     public Interaction(List<Transmission> transmissions, List<Choix> choix) {
         this.transmissions = transmissions;
         this.choix = choix;
@@ -16,8 +20,16 @@ public class Interaction {
         return transmissions;
     }
 
+    public void addTransmission(Transmission t) {
+        this.transmissions.add(t);
+    }
+
     public List<Choix> getChoix() {
         return choix;
+    }
+
+    public void addChoix(Choix cx) {
+        this.choix.add(cx);
     }
 
     /** Get the valid trade (Transmission) for the player.
