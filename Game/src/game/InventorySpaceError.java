@@ -6,7 +6,18 @@ package game;
  * surpass their inventory space.
  */
 public class InventorySpaceError extends Exception {
-    public InventorySpaceError(String message) {
+
+    private Objet objet;
+
+    public InventorySpaceError(String message, Objet objet) {
         super(message);
+        this.objet = objet;
+    }
+
+    /** get the objets which provoke the execption
+     * @return the objet
+     */
+    public Objet getErrorObjet() {
+        return objet;
     }
 }
