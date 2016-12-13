@@ -30,7 +30,6 @@ import java.util.Optional;
  *
  * INTERACTION WITH A PERSON :
  * interagir <nom personne>
- * choisir <num choix> (type int)
  */
 public class CommandInterpreter {
 
@@ -67,8 +66,7 @@ public class CommandInterpreter {
                                             Optional<Objet> objet = findPlayerObjet(command.getWord(4));
                                             if (!objet.isPresent()) {
                                                 System.out.println("'" + command.getWord(4) + "' n'est pas présent dans l'inventaire!");
-                                            }
-                                            else {
+                                            } else {
                                                 display.printDetail(objet.get());
                                             }
                                             break;
@@ -76,8 +74,7 @@ public class CommandInterpreter {
                                             Optional<Connaissance> connaissance = findPlayerConnaissance(command.getWord(4));
                                             if (!connaissance.isPresent()) {
                                                 System.out.println("'" + command.getWord(4) + "' n'est pas présent dans l'inventaire!");
-                                            }
-                                            else {
+                                            } else {
                                                 display.printDetail(connaissance.get());
                                             }
                                             break;
@@ -112,35 +109,31 @@ public class CommandInterpreter {
                                             Optional<Objet> objet = findCurrentPlaceObjet(command.getWord(4));
                                             if (!objet.isPresent()) {
                                                 System.out.println("'" + command.getWord(4) + "' n'est pas présent dans le lieu!");
-                                            }
-                                            else {
+                                            } else {
                                                 display.printDetail(objet.get());
                                             }
                                             break;
                                         case "connaissance":
                                             Optional<Connaissance> connaissance = findCurrentPlaceConnaissance(command.getWord(4));
-                                            if (!objet.isPresent()) {
+                                            if (!connaissance.isPresent()) {
                                                 System.out.println("'" + command.getWord(4) + "' n'est pas présent dans le lieu!");
-                                            }
-                                            else {
+                                            } else {
                                                 display.printDetail(connaissance.get());
                                             }
                                             break;
                                         case "personne":
                                             Optional<Personne> personne = findCurrentPlacePersonne(command.getWord(4));
-                                            if (!objet.isPresent()) {
+                                            if (!personne.isPresent()) {
                                                 System.out.println("'" + command.getWord(4) + "' n'est pas présent dans le lieu!");
-                                            }
-                                            else {
+                                            } else {
                                                 display.printDetail(personne.get());
                                             }
                                             break;
                                         case "chemin":
                                             Optional<Chemin> chemin = findCurrentPlaceChemin(command.getWord(4));
-                                            if (!objet.isPresent()) {
+                                            if (!chemin.isPresent()) {
                                                 System.out.println("'" + command.getWord(4) + "' n'est pas présent dans le lieu!");
-                                            }
-                                            else {
+                                            } else {
                                                 display.printDetail(chemin.get());
                                             }
                                             break;
@@ -160,14 +153,16 @@ public class CommandInterpreter {
                 ////////////// ACTION /////////////////
                 case "prendre":
                     Optional<Objet> objetPre = findCurrentPlaceObjet(command.getWord(1));
-                    if (!objetPre.isPresent()) {
-                        System.out.println("'" + command.getWord(1) + "' n'est pas présent dans le lieu!");
-                        try {
-                            explorateur.getLieuActuel().prendreObjet(objetPre.get());
-                            explorateur.ajouterObjet(objetPre.get());
-                        } catch (InventorySpaceError e) {
-                            System.out.println("Impossible ! L'inventaire est plein !");
+                    try {
+                        if (!objetPre.isPresent()) {
+                            System.out.println("'" + command.getWord(1) + "' n'est pas présent dans le lieu!");
                         }
+                            else {
+                                explorateur.getLieuActuel().prendreObjet(objetPre.get());
+                                explorateur.ajouterObjet(objetPre.get());
+                            }
+                    } catch (InventorySpaceError e) {
+                        System.out.println("Impossible ! L'inventaire est plein !");
                     }
                     break;
                 case "deposer":
@@ -199,7 +194,7 @@ public class CommandInterpreter {
                             }
                         }
                         // We set the correct place for the player (i.e. the correct end of the path) :
-                        if (chemin.get().getLieu1().getName().equals( explorateur.getLieuActuel() )) {
+                        if (chemin.get().getLieu1().getName().equals( explorateur.getLieuActuel().getName() )) {
                             explorateur.setLieuActuel( chemin.get().getLieu2() );
                         }
                         else {
@@ -209,8 +204,33 @@ public class CommandInterpreter {
                     break;
                 ////////////// INTERACTION //////////////
                 case "interagir":
+                    Optional<Personne> personne = findCurrentPlacePersonne(command.getWord(1));
+                    if (!personne.isPresent()) {
+                        System.out.println("'" + command.getWord(1) + "' n'est pas présent dans le lieu!");
+                    }
+                    else {
+                        interactWith(personne.get());
+                    }
                     break;
-                case "choisir":
+                /////////// HELP ///////////////
+                case "help":
+                     System.out.println ("* GLOBAL DISPLAY : \n" +
+                             "* afficher joueur objets/connaissances/inventaires \n" +
+                             "* afficher joueur detail objet <nom objet> (type String) \n" +
+                             "* afficher joueur detail objet <nom connaissance>\n" +
+                             "* afficher lieu objets/connaissances/personnes/chemins\n" +
+                             "* afficher lieu detail objet <nom objet>\n" +
+                             "* afficher lieu detail connaissance <nom connaissance>\n" +
+                             "* afficher lieu detail personne <nom personne>\n" +
+                             "* afficher lieu detail chemin <nom chemin>\n" +
+                             "*\n" +
+                             "* GLOBAL ACTION :\n" +
+                             "* prendre <nom objet>\n" +
+                             "* deposer <nom objet>\n" +
+                             "* utiliser <nom chemin>\n" +
+                             "*\n" +
+                             "* INTERACTION WITH A PERSON :\n" +
+                             "* interagir <nom personne>");
                     break;
                 default:
                     System.out.println("Erreur de syntaxe !");
@@ -289,6 +309,13 @@ public class CommandInterpreter {
         return  explorateur.getLieuActuel().getCheminsPossibles().stream()
                 .filter(chemin -> chemin.getName().equals(name) && chemin.estVisible(explorateur) )
                 .findFirst();
+    }
+
+    /** Handle the interraction with a person
+     * @param personne personne
+     */
+    private void interactWith(Personne personne) {
+        System.out.println("To be implemented");
     }
 
 }

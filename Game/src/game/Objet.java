@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +14,12 @@ public class Objet extends Trouvable {
     private Map<String, List<Condition>> conditionsDeposable;
 
     /** Simple constructor */
-    public Objet(String name) {
+    public Objet(String name, int taille) {
         this.name = name;
+        this.taille = taille;
+        this.descriptions = new ArrayList<>();
+        this.transformations = new ArrayList<>();
+        this.deposable = false;
     }
 
     /** Object */

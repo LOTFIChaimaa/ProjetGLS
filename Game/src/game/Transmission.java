@@ -1,23 +1,29 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Transmission {
 
     private List<Objet> objetsTransmis;
     private List<Objet> objetsConsommes;
-    private List<Connaissance> connaissances;
+    private List<Connaissance> connaissancesTransmis;
     private List<Condition> conditions;
 
     /** Simple constructor */
-    public Transmission() {};
+    public Transmission() {
+        this.objetsConsommes = new ArrayList<>();
+        this.objetsTransmis = new ArrayList<>();
+        this.connaissancesTransmis = new ArrayList<>();
+        this.conditions = new ArrayList<>();
+    };
 
     /** Complete constructor */
     public Transmission(List<Objet> transmis, List<Objet> consommes,
-            List<Connaissance> connaissances, List<Condition> conditions) {
+                        List<Connaissance> connaissancesTransmis, List<Condition> conditions) {
         this.objetsTransmis = transmis;
         this.objetsConsommes = consommes;
-        this.connaissances = connaissances;
+        this.connaissancesTransmis = connaissancesTransmis;
         this.conditions = conditions;
     }
 
@@ -30,7 +36,7 @@ public class Transmission {
     }
 
     public void addConnaissance(Connaissance cn) {
-        this.connaissances.add(cn);
+        this.connaissancesTransmis.add(cn);
     }
 
     public void addCondition(Condition c) {
@@ -48,7 +54,7 @@ public class Transmission {
         }
 
         // Player must posses all required knowledge
-        if (!player.getConnaissances().containsAll(this.connaissances)) {
+        if (!player.getConnaissances().containsAll(this.connaissancesTransmis)) {
             return false;
         }
 
@@ -78,7 +84,7 @@ public class Transmission {
         }
 
         // Give player knowledge
-        for (Connaissance c : this.connaissances) {
+        for (Connaissance c : this.connaissancesTransmis) {
             player.ajouterConnaissance(c);
         }
     }

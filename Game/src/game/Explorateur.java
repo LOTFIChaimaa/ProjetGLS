@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Explorateur {
@@ -11,6 +12,15 @@ public class Explorateur {
     private List<Connaissance> connaissances; // Ses connaissances
     private List<Objet> objets; // Ses objets
     private Lieu lieuActuel; // Le lieu actuel du personnage
+
+    /** simple constructor */
+    public Explorateur(String name, int tailleMax) {
+        this.name = name;
+        this.tailleMax = tailleMax;
+        this.tailleInventaire = 0;
+        this.objets = new ArrayList<>();
+        this.connaissances = new ArrayList<>();
+    }
 
     public Explorateur(String name, int tailleMax, List<Connaissance> connaissances,
             List<Objet> objets) {
@@ -85,7 +95,7 @@ public class Explorateur {
     public void ajouterObjet(Objet o) throws InventorySpaceError {
         if (this.tailleInventaire + o.getTaille() > this.tailleMax) {
             throw new InventorySpaceError(this.name +
-                " can't acquire " + o.getName() + " : not enough inventory space.");
+                " can't acquire " + o.getName() + " : not enough inventory space.", o);
         } else {
             this.objets.add(o);
             this.tailleInventaire += o.getTaille();

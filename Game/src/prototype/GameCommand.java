@@ -34,7 +34,7 @@ public class GameCommand {
     private String [] cmd;
 
     public GameCommand(String msg) {
-        cmd = msg.toLowerCase().split(" ");
+        cmd = msg.split(" ");
     }
 
     /** return the word n°i of the comman

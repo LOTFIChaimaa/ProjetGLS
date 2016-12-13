@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Description {
@@ -10,6 +11,7 @@ public class Description {
     /** Simple constructor */
     public Description(String texte) {
         this.texte = texte;
+        this.conditions = new ArrayList<>();
     }
 
     /** Complete constructor */

@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** Un Trouvable est une entite que le joueur peut trouver dans un Lieu.
@@ -7,8 +8,8 @@ import java.util.List;
  */
 public abstract class Trouvable {
 
-    private List<Condition> conditionsVisibilite;
-    private List<Condition> conditionsActivation;
+    private List<Condition> conditionsVisibilite = new ArrayList<>();
+    private List<Condition> conditionsActivation = new ArrayList<>();
 
     /** Check if this discoverable is visible by the player.
     * @param player Explorateur

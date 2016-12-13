@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Connaissance extends Trouvable {
@@ -10,6 +11,7 @@ public class Connaissance extends Trouvable {
     /** Simple constructor */
     public Connaissance(String name) {
         this.name = name;
+        this.descriptions = new ArrayList<>();
     }
 
     /** Complete constructor */
@@ -20,6 +22,10 @@ public class Connaissance extends Trouvable {
 
     public String getName() {
         return name;
+    }
+
+    public void addDescription(Description desc) {
+        this.descriptions.add(desc);
     }
 
     public List<Description> getDescriptions() {

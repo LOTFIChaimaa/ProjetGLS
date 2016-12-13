@@ -34,7 +34,7 @@ public class Display {
         indent();
         System.out.println("Objet " + objet.getName() + " :");
         indent();
-        System.out.println("** Description : " + objet.getDescription(explorateur));
+        System.out.println("** Description : " + objet.getDescription(explorateur).getTexte());
     }
 
     /** Print informations about an "connaissance"
@@ -44,7 +44,7 @@ public class Display {
         indent();
         System.out.println("Connaissance " + connaissance.getName() + " :");
         indent();
-        System.out.println("** Description : " + connaissance.getDescription(explorateur));
+        System.out.println("** Description : " + connaissance.getDescription(explorateur).getTexte());
     }
 
     /** Print informations about an "personne"
@@ -68,7 +68,7 @@ public class Display {
         indent();
         System.out.println("Chemin " + chemin.getName() + " :");
         indent();
-        System.out.println("**Description " + chemin.getDescription(explorateur) + ouvert);
+        System.out.println("**Description " + chemin.getDescription(explorateur).getTexte() + ouvert);
     }
 
     /** Print the number of objects and the total size of the inventory
@@ -166,15 +166,16 @@ public class Display {
         indent();
         if (objet.estDeposable(explorateur)) {
             System.out.println("** Peut être déposé");
-        }
-        else {
+        } else {
             System.out.println("** Ne peut pas être déposé");
         }
         indent();
-        System.out.println ("** Peut se transformer en :");
-        nbTab++;
-        print(objet.transformer(explorateur));
-        nbTab--;
+        if (objet.transformer(explorateur) != null) {
+            nbTab++;
+            System.out.println("** Peut se transformer en :");
+            print(objet.transformer(explorateur));
+            nbTab--;
+        }
     }
 
     /** Display informations with details of a connaissance.

@@ -16,6 +16,9 @@ public class Lieu {
     /** Simple constructor. */
     public Lieu(String name) {
         this.name = name;
+        this.cheminsObligatoires = new ArrayList<>();
+        this.cheminsPossibles = new ArrayList<>();
+        this.trouvables = new ArrayList<>();
     }
 
     /** Complete constructor. */
@@ -100,9 +103,9 @@ public class Lieu {
     */
     public List<?> getTrouvablesVisibles(Explorateur player, Class<?> entite) {
         return this.trouvables.stream()
-            .filter(tr -> tr.estVisible(player))
-            .map(tr -> tr.typeEntite() == entite.getName())
-            .collect(Collectors.toList());
+            .filter(tr -> tr.estVisible(player) && entite.isInstance(tr))
+                .collect(Collectors.toList());
+
     }
 
     /** Take an objet in the place
@@ -110,12 +113,5 @@ public class Lieu {
      */
     public void prendreObjet(Objet objet) {
         trouvables.remove(objet);
-    }
-
-    /** Depose an objet in the place
-     * @param objet objet to depose
-     */
-    public void deposerObjet(Objet objet) {
-        trouvables.add(objet);
     }
 }
