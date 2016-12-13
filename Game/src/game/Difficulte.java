@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Difficulte {
@@ -7,6 +8,12 @@ public class Difficulte {
     private String name; // La description
     private List<Connaissance> connaissances; // Les connaissances de départ
     private List<Objet> objets; // Les objets de départ
+
+    public Difficulte(String name) {
+        this.name = name;
+        this.connaissances = new ArrayList<>();
+        this.objets = new ArrayList<>();
+    }
 
     public Difficulte(String name, List<Connaissance> connaissances, List<Objet> objets) {
         this.name = name;

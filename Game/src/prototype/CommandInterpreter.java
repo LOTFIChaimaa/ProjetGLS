@@ -8,6 +8,7 @@ import game.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 /** Can interpret a GameCommand typed by the player
  *
@@ -94,7 +95,7 @@ public class CommandInterpreter {
                                     display.printObjetCurrentPlace();
                                     break;
                                 case "connaissances":
-                                    display.printConnaissancePlayer();
+                                    display.printConnaissanceCurrentPlace();
                                     break;
                                 case "personnes":
                                     display.printPersonneCurrentPlace();
@@ -315,7 +316,28 @@ public class CommandInterpreter {
      * @param personne personne
      */
     private void interactWith(Personne personne) {
-        System.out.println("To be implemented");
+        Scanner scanner = new Scanner(System.in);
+
+        Interaction interaction = personne.getInteraction();
+        System.out.println("Vous parlez à " + personne.getName() +" :");
+        Choix choix = interaction.getFirstChoix(explorateur); // get the first choix of the interaction
+        while (!choix.isEstFin()) {
+            Boolean isActionFound = false;
+            display.printListAction(choix); // display the list of choix
+            while (!isActionFound) { // Read the player action
+                try {
+                    int numAction = Integer.parseInt( scanner.nextLine() );
+                    Action action = choix.getPossiblesActions(explorateur).get(numAction-1);
+                    action.applyAction(explorateur);
+                    isActionFound = true;
+                }
+                catch (Exception e) {
+                    System.out.println("Choix invalide !");
+                }
+            }
+            choix = interaction.getPossibleChoix(explorateur);
+        }
+        System.out.println("Vous avez quitté l'interaction avec " + personne.getName() + " !");
     }
 
 }

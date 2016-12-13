@@ -82,10 +82,4 @@ public class Jeu {
         this.joueur.init(this.lieuDepart, d);
     }
 
-    /** Main game loop. */
-    public void jouer() {
-        while (this.joueur.getLieuActuel() != this.lieuArrivee) {
-            continue;
-        }
-    }
 }

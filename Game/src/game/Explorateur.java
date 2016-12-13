@@ -140,7 +140,7 @@ public class Explorateur {
         }
 
         // Check that we're on the correct difficulty
-        if (this.difficulte.getName() != c.getDifficulte().getName()) {
+        if (this.difficulte != null && c.getDifficulte()!= null && !this.difficulte.getName().equals(c.getDifficulte().getName()) ) {
             return false;
         }
 
