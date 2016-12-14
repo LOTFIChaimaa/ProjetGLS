@@ -48,15 +48,6 @@ public class Transmission {
      * @return boolean
      */
     public boolean check(Explorateur player) {
-        // Player must have all required objets in inventory
-        if (!player.getObjets().containsAll(this.objetsConsommes)) {
-            return false;
-        }
-
-        // Player must posses all required knowledge
-        if (!player.getConnaissances().containsAll(this.connaissancesTransmis)) {
-            return false;
-        }
 
         // Player must meet all conditions
         for (Condition c : this.conditions) {

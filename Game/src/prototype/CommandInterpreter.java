@@ -337,6 +337,7 @@ public class CommandInterpreter {
             }
             choix = interaction.getPossibleChoix(explorateur);
         }
+        System.out.println(choix.getName());
         System.out.println("Vous avez quitté l'interaction avec " + personne.getName() + " !");
     }
 

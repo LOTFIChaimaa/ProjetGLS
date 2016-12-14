@@ -55,7 +55,7 @@ public class Display {
         indent();
         System.out.println("Personne " + personne.getName() + " :");
         indent();
-        System.out.println("**Description : " + personne.getDescription());
+        System.out.println("**Description : " + personne.getDescription().getTexte());
     }
 
     /** Print informations about an "chemin"
