@@ -89,19 +89,19 @@ jeu jeuEnigme {
 		interaction {
 			choix reponses {
 				// Action 1 Faux
-				action {
+				action "Choix 1" {
 					transmission {
 						objetsConsommes tentative 
 					}
 				}
 				// Action 2 Vrai
-				action {
+				action "Choix 2" {
 					transmission {
 						connaissances reussite
 					}
 				}
 				// Action 3 Faux
-				action {
+				action "Choix 3" {
 					transmission {
 						objetsConsommes tentative
 					}
@@ -113,5 +113,5 @@ jeu jeuEnigme {
 	}
 	
 	lieuDepart enigme
-	lieuxArrivee succes
+	lieuxArrivee succes echec
 }

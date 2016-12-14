@@ -107,7 +107,7 @@ Personne:
  */
 Interaction:
 	'interaction' '{'
-		(transmission+=Transmission)*
+		(transmissions+=Transmission)*
 		(choix+=Choix)+
 	'}'
 ;
@@ -130,12 +130,13 @@ Choix:
 
 /* Action
  * 	caractérisé par :
+ * 		- son texte
  * 		- choix nécessaires
  * 		- conditions nécessaires
  * 		- transmissions : donnent les objets et connaissances qui peuvent être donnés ou consommés
  */
  Action:
-	'action' '{'
+	'action' texte=STRING '{'
 		('choixNecessaires' (choixNecessaires+=[Choix|ID])+)?
 		(conditions+=Condition)*
 		(transmissions+=Transmission)+

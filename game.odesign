@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="game" version="11.0.0.201601261200">
+  <ownedViewpoints name="gameViewpoint" modelFileExtension="xmi">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Jeu" domainClass="game.Jeu" enablePopupBars="true">
+      <metamodel href="http://www.enseeiht.fr/Game#/"/>
+      <defaultLayer name="Default">
+        <nodeMappings name="Description" domainClass="Description">
+          <style xsi:type="style:SquareDescription" showIcon="false" labelExpression="feature:texte" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='yellow']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Explorateur" domainClass="Explorateur">
+          <style xsi:type="style:SquareDescription" showIcon="false" labelExpression="[self.name + '\n' + 'tailleMax: ' + self.tailleMax/]" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Difficulte" domainClass="Difficulte">
+          <style xsi:type="style:LozengeNodeDescription" showIcon="false" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='orange']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Connaissance" domainClass="Connaissance">
+          <style xsi:type="style:EllipseNodeDescription" showIcon="false" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Personne" domainClass="Personne">
+          <style xsi:type="style:EllipseNodeDescription" showIcon="false" labelExpression="[self.name + '\n' + 'obligatoire: ' + self.obligatoire /]" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_green']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Interaction" domainClass="Interaction">
+          <style xsi:type="style:SquareDescription" showIcon="false" labelExpression="Interaction" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Choix" domainClass="Choix">
+          <style xsi:type="style:LozengeNodeDescription" showIcon="false" labelExpression="[self.name + '\n' + 'estDebut: ' + self.estDebut + '\n' + 'estFin: ' + self.estFin/]" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Action" domainClass="Action">
+          <style xsi:type="style:DotDescription" showIcon="false" labelExpression="feature:texte" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='blue']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Objet" domainClass="Objet">
+          <style xsi:type="style:DotDescription" showIcon="false" labelExpression="[self.name + '\n' + 'taille: ' + taille/]" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='red']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Lieu" semanticCandidatesExpression="[lieux->select(i | lieuxArrivee->excludes(i))->excluding(lieuDepart)/]" doubleClickDescription="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@toolSections.0/@ownedTools[name='Jeu']/@tools.8" domainClass="Lieu">
+          <style xsi:type="style:EllipseNodeDescription" showIcon="false" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_chocolate']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="LieuDepart" semanticCandidatesExpression="[lieuDepart/]" domainClass="Lieu">
+          <style xsi:type="style:EllipseNodeDescription" showIcon="false" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_green']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_chocolate']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="LieuArrivee" semanticCandidatesExpression="[lieuxArrivee/]" doubleClickDescription="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@toolSections.0/@ownedTools[name='Jeu']/@tools.7" domainClass="Lieu">
+          <style xsi:type="style:EllipseNodeDescription" showIcon="false" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='dark_red']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_chocolate']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Chemin" domainClass="Chemin">
+          <style xsi:type="style:LozengeNodeDescription" showIcon="false" labelExpression="[self.name + '\n' + 'ouvert: ' + self.ouvert + '\n' + 'visible: ' + self.visible/]" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_chocolate']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Transmission" domainClass="Transmission">
+          <style xsi:type="style:LozengeNodeDescription" showIcon="false" labelExpression="Transmission" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_purple']"/>
+          </style>
+        </nodeMappings>
+        <nodeMappings name="Condition" domainClass="Condition">
+          <style xsi:type="style:LozengeNodeDescription" showIcon="false" labelExpression="['Condition' + '\n' + 'hasard: ' + self.hasard/]" labelPosition="node" resizeKind="NSEW">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='white']"/>
+            <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+          </style>
+        </nodeMappings>
+        <edgeMappings name="Transformation" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetFinderExpression="[self.objet/]" sourceFinderExpression="[self.eContainer()/]" domainClass="Transformation" useDomainElement="true">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="transformation">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Trouvable" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuDepart'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Connaissance'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Personne']" targetFinderExpression="[self.entite/]" sourceFinderExpression="[self.eContainer()/]" domainClass="Trouvable" useDomainElement="true">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="['trouvable' + '\n' + 'visible: ' + self.visible + '\n' + 'actif: ' + self.actif/]">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Deposable" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuDepart'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetFinderExpression="[self.objet/]" sourceFinderExpression="[self.eContainer()/]" domainClass="Deposable" useDomainElement="true">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="deposable">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Description.conditions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Description']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="condition">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Explorateur.difficulte" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Explorateur']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Difficulte']" targetFinderExpression="[self.difficulte/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="difficulte">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Explorateur.connaissances" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Explorateur']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Connaissance']" targetFinderExpression="[self.connaissances/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="connaissance">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Explorateur.objets" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Explorateur']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetFinderExpression="[self.objets/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="['objet (' + self.objets->count(view.oclAsType(DEdge).targetNode.oclAsType(DDiagramElement).target) + ')'/]">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Explorateur.lieuActuel" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Explorateur']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuDepart']" targetFinderExpression="[self.lieuActuel/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="lieuActuel">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Difficulte.connaissances" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Difficulte']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Connaissance']" targetFinderExpression="[self.connaissances/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="connaissance">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Difficulte.objets" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Difficulte']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetFinderExpression="[self.objets/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="['objet (' + self.objets->count(view.oclAsType(DEdge).targetNode.oclAsType(DDiagramElement).target) + ')'/]">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Connaissance.descriptions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Connaissance']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Description']" targetFinderExpression="[self.descriptions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="description">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Personne.description" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Personne']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Description']" targetFinderExpression="[self.description/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="description">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Personne.interaction" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Personne']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Interaction']" targetFinderExpression="[self.interaction/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="interaction">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Interaction.transmissions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Interaction']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']" targetFinderExpression="[self.transmissions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="transmission">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Interaction.choix" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Interaction']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Choix']" targetFinderExpression="[self.choix/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="choix">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Choix.actions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Choix']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Action']" targetFinderExpression="[self.actions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="action">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Choix.conditions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Choix']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="condition">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Action.choixNecessaires" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Action']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Choix']" targetFinderExpression="[self.choixNecessaires/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="choixNecessaire">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Action.conditions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Action']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="condition">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Action.transmissions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Action']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']" targetFinderExpression="[self.transmissions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="transmission">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Objet.descriptions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Description']" targetFinderExpression="[self.descriptions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="description">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Objet.transformations" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']" targetFinderExpression="[self.transformations/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="transformation">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Lieu.descriptions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuDepart']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Description']" targetFinderExpression="[self.descriptions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="description">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Lieu.cheminsPossibles" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuDepart']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']" targetFinderExpression="[self.cheminsPossibles/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="cheminPossible">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Lieu.cheminsObligatoires" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuDepart']" targetFinderExpression="[self.cheminsObligatoires/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="cheminObligatoire">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Chemin.descriptions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Description']" targetFinderExpression="[self.descriptions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="description">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Chemin.lieu1" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuDepart']" targetFinderExpression="[self.lieu1/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="lieu1">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Chemin.lieu2" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuDepart']" targetFinderExpression="[self.lieu2/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="lieu2">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Chemin.conditionsOuverture" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditionsOuverture/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="conditionsOuverture">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Chemin.conditionsVisibilite" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditionsVisibilite/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="conditionVisibilite">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Chemin.transmissions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']" targetFinderExpression="[self.transmissions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="transmission">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Transmission.objetsTransmis" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetFinderExpression="[self.objetsTransmis/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="['objetTransmis (' + self.objetsTransmis->count(view.oclAsType(DEdge).targetNode.oclAsType(DDiagramElement).target) + ')'/]">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Transmission.objetsConsommes" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetFinderExpression="[self.objetsConsommes/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="['objetConsomme (' + self.objetsConsommes->count(view.oclAsType(DEdge).targetNode.oclAsType(DDiagramElement).target) + ')'/]">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Transmission.connaissances" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Connaissance']" targetFinderExpression="[self.connaissances/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="connaissance">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Transmission.conditions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="condition">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Condition.objetsPossedes" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetFinderExpression="[self.objetsPossedes/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="['objetPossede (' + self.objetsPossedes->count(view.oclAsType(DEdge).targetNode.oclAsType(DDiagramElement).target) + ')'/]">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Condition.objetsManquants" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']" targetFinderExpression="[self.objetsManquants/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="objetManquant">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Condition.connaissancesPossedees" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Connaissance']" targetFinderExpression="[self.connaissancesPossedees/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="connaissancePossedee">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Condition.connaissancesManquantes" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Connaissance']" targetFinderExpression="[self.connaissancesManquantes/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="connaissanceManquante">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Condition.difficulte" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Difficulte']" targetFinderExpression="[self.difficulte/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="difficulte">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Transformation.conditions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Transformation']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="condition">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Trouvable.conditionsVisibilite" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Trouvable']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditionsVisibilite/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="conditionVisibilite">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Trouvable.conditionsActivation" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Trouvable']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditionsActivation/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="conditionActivation">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="Deposable.conditions" sourceMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Deposable']" targetMapping="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" targetFinderExpression="[self.conditions/]">
+          <style sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <centerLabelStyleDescription showIcon="false" labelExpression="condition">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </centerLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <toolSections name="Palette">
+          <ownedTools xsi:type="tool:ToolGroup" name="Jeu">
+            <tools xsi:type="tool:NodeCreationDescription" name="Explorateur" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Explorateur']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Explorateur" referenceName="joueur">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="explorateur"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Difficulte" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Difficulte']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Difficulte" referenceName="difficultes">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="difficulte"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Objet" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Objet" referenceName="objets">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="objet"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Connaissance" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Connaissance']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Connaissance" referenceName="connaissances">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="connaissance"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Personne" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Personne']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Personne" referenceName="personnes">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="personne"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Lieu" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Lieu" referenceName="lieux">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="lieu"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Chemin" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Chemin" referenceName="chemins">
+                    <subModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="chemin"/>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:DoubleClickDescription" name="LieuDepart" mappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee']">
+              <element name="element"/>
+              <elementView name="elementView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[element.eContainer()/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="lieuDepart" valueExpression="[element/]"/>
+                  <subModelOperations xsi:type="tool_1:Unset" featureName="lieuxArrivee" elementExpression="[element/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:DoubleClickDescription" name="LieuArrivee" mappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu']">
+              <element name="element"/>
+              <elementView name="elementView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[element.eContainer()/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="lieuxArrivee" valueExpression="[self.oclAsType(Jeu).lieuxArrivee->including(element)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Condition">
+            <tools xsi:type="tool:NodeCreationDescription" name="Condition" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" extraMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Description'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Choix'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Action'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Description) or self.oclIsTypeOf(Choix) or self.oclIsTypeOf(Action) or self.oclIsTypeOf(Transformation) or self.oclIsTypeOf(Transmission) or self.oclIsTypeOf(Deposable)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Condition" referenceName="conditions"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ObjetPossede" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Condition.objetsPossedes']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="objetsPossedes" valueExpression="[self.oclAsType(Condition).objetsPossedes->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ObjetManquant" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Condition.objetsManquants']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="objetsManquants" valueExpression="[self.oclAsType(Condition).objetsManquants->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ConnaissancePossedee" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Condition.connaissancesPossedees']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="connaissancesPossedees" valueExpression="[self.oclAsType(Condition).connaissancesPossedees->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ConnaissanceManquante" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Condition.connaissancesManquantes']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="connaissancesManquantes" valueExpression="[self.oclAsType(Condition).connaissancesManquantes->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="Difficulte" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Condition.difficulte']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="difficulte" valueExpression="[target/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Explorateur">
+            <tools xsi:type="tool:EdgeCreationDescription" name="ChoixDifficulte" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Explorateur.difficulte']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="difficulte" valueExpression="[target/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="LieuActuel" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Explorateur.lieuActuel']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="lieuActuel" valueExpression="[target/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ConnaissanceJoueur" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Explorateur.connaissances']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="connaissances" valueExpression="[self.oclAsType(Explorateur).connaissances->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ObjetJoueur" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Explorateur.objets']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="objets" valueExpression="[self.oclAsType(Explorateur).objets->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Difficulte">
+            <tools xsi:type="tool:EdgeCreationDescription" name="ConnaissanceDifficulte" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Difficulte.connaissances']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="connaissances" valueExpression="[self.oclAsType(Difficulte).connaissances->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ObjetDifficulte" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Difficulte.objets']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="objets" valueExpression="[self.oclAsType(Difficulte).objets->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Description">
+            <tools xsi:type="tool:NodeCreationDescription" name="Description" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Description']" extraMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Connaissance'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Personne'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Objet'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Lieu'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuArrivee'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='LieuDepart'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Connaissance) or self.oclIsTypeOf(Personne) or self.oclIsTypeOf(Objet) or self.oclIsTypeOf(Lieu) or self.oclIsTypeOf(Description)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Description" referenceName="descriptions"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Interaction">
+            <tools xsi:type="tool:NodeCreationDescription" name="Interaction" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Interaction']" extraMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Personne']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Personne)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Interaction" referenceName="interaction"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Choix" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Choix']" extraMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Interaction']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Interaction)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Choix" referenceName="choix"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="Action" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Action']" extraMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Choix']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Choix)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Action" referenceName="actions"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ChoixNecessaires" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Action.choixNecessaires']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="choixNecessaires" valueExpression="[self.oclAsType(Action).choixNecessaires->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Transmission">
+            <tools xsi:type="tool:NodeCreationDescription" name="Transmission" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']" extraMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Interaction'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Action'] //@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Transmission']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Interaction) or self.oclIsTypeOf(Action) or self.oclIsTypeOf(Transmission)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Transmission" referenceName="transmissions"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ObjetTransmis" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Transmission.objetsTransmis']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="objetsTransmis" valueExpression="[self.oclAsType(Transmission).objetsTransmis->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="ObjetConsomme" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Transmission.objetsConsommes']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="objetsConsommes" valueExpression="[self.oclAsType(Transmission).objetsConsommes->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="Connaissance" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Transmission.connaissances']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="connaissances" valueExpression="[self.oclAsType(Transmission).connaissances->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Transformation">
+            <tools xsi:type="tool:EdgeCreationDescription" name="Transformation" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Transformation']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Transformation" referenceName="transformations">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[instance/]">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="objet" valueExpression="[target/]"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Lieu">
+            <tools xsi:type="tool:EdgeCreationDescription" name="Deposable" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Deposable']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Deposable" referenceName="deposables">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[instance/]">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="objet" valueExpression="[target/]"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="Trouvable" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Trouvable']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Trouvable" referenceName="trouvables">
+                    <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[instance/]">
+                      <subModelOperations xsi:type="tool_1:SetValue" featureName="entite" valueExpression="[target/]"/>
+                    </subModelOperations>
+                  </subModelOperations>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="CheminsPossibles" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Lieu.cheminsPossibles']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="cheminsPossibles" valueExpression="[self.oclAsType(Lieu).cheminsPossibles->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="CheminsObligatoires" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Lieu.cheminsObligatoires']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="cheminsObligatoires" valueExpression="[self.oclAsType(Lieu).cheminsObligatoires->including(target)/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Chemin">
+            <tools xsi:type="tool:EdgeCreationDescription" name="Lieu1" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Chemin.lieu1']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="lieu1" valueExpression="[target/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:EdgeCreationDescription" name="Lieu2" edgeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@edgeMappings[name='Chemin.lieu2']">
+              <sourceVariable name="source"/>
+              <targetVariable name="target"/>
+              <sourceViewVariable name="sourceView"/>
+              <targetViewVariable name="targetView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[source/]">
+                  <subModelOperations xsi:type="tool_1:SetValue" featureName="lieu2" valueExpression="[target/]"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="ConditionOuverture" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" extraMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Chemin)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Condition" referenceName="conditionsOuverture"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="ConditionVisibilite" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']" extraMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Chemin']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Chemin)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Condition" referenceName="conditionsVisibilite"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ToolGroup" name="Trouvable">
+            <tools xsi:type="tool:NodeCreationDescription" name="ConditionVisibilite" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Trouvable)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Condition" referenceName="conditionsVisibilite"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+            <tools xsi:type="tool:NodeCreationDescription" name="ConditionActivation" nodeMappings="//@ownedViewpoints[name='gameViewpoint']/@ownedRepresentations[name='Jeu']/@defaultLayer/@nodeMappings[name='Condition']">
+              <variable name="container"/>
+              <viewVariable name="containerView"/>
+              <initialOperation>
+                <firstModelOperations xsi:type="tool_1:If" conditionExpression="[self.oclIsTypeOf(Trouvable)/]">
+                  <subModelOperations xsi:type="tool_1:ChangeContext" browseExpression="[container/]"/>
+                  <subModelOperations xsi:type="tool_1:CreateInstance" typeName="game.Condition" referenceName="conditionsActivation"/>
+                </firstModelOperations>
+              </initialOperation>
+            </tools>
+          </ownedTools>
+        </toolSections>
+      </defaultLayer>
+    </ownedRepresentations>
+  </ownedViewpoints>
+</description:Group>
