@@ -5,25 +5,43 @@ import java.util.ArrayList;
 
 public class Action {
 
-    List<Choix> choixNecessaires; // Les choix précédents de l"explorateur dont dépendent l'action
-    List<Condition> conditions; // Les conditions de l'action
+    private String texte; // Text of the action
+    List<Choix> choixNecessaires; // Les choix nécéssaires
+    List<Condition> conditions; // Les conditions de l'action pour choisir le choix suivant
     List<Transmission> transmissions; // Les transmissions possibles lors de l'action
 
     /** Simple constructor */
-    public Action() {
+    public Action(String name) {
+        this.texte = name;
         this.choixNecessaires = new ArrayList<Choix>();
         this.conditions = new ArrayList<Condition>();
         this.transmissions = new ArrayList<Transmission>();
     }
 
     /** Complete constructor */
-    public Action(List<Choix> choixNecessaires, List<Condition> conditions, List<Transmission> transmissions) {
-        this.choixNecessaires = choixNecessaires;
+    public Action(String name, List<Choix> choix, List<Condition> conditions, List<Transmission> transmissions) {
+        this.texte = name;
+        this.choixNecessaires = choix;
         this.conditions = conditions;
         this.transmissions = transmissions;
     }
 
-    public List<Choix> getChoixNecessaires() {
+    /** Checks if the Choix can be applied.
+     * @param explorateur Explorateur
+     * @return boolean
+     */
+    public boolean check(Explorateur explorateur) {
+        for(Condition c : this.conditions) {
+            if (!explorateur.check(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String getTexte() { return this.texte; }
+
+    public List<Choix> getChoixSuivant() {
         return choixNecessaires;
     }
 
@@ -59,7 +77,16 @@ public class Action {
                 return t;
             }
         }
-
         return null;
+    }
+
+    /** Apply an action during an interaction
+     * @param explorateur
+     */
+    public void applyAction(Explorateur explorateur) throws InventorySpaceError{
+        Transmission transmission = getTransmission(explorateur);
+        if (transmission != null) {
+            transmission.transmettre(explorateur);
+        }
     }
 }

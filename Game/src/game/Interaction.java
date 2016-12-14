@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Interaction {
@@ -8,12 +9,41 @@ public class Interaction {
     private List<Choix> choix; // Tous les choix possibles de l'intéraction
 
     /** Simple constructor */
-    public Interaction() {};
+    public Interaction() {
+        this.transmissions = new ArrayList<>();
+        this.choix = new ArrayList<>();
+    }
 
     /** Complete constructor */
     public Interaction(List<Transmission> transmissions, List<Choix> choix) {
         this.transmissions = transmissions;
         this.choix = choix;
+    }
+
+    /** get the next choix of the interraction
+     * @param explorateur explorateur
+     * @return choix choix
+     */
+    public Choix getPossibleChoix(Explorateur explorateur) {
+        for (Choix c : choix) {
+            if (c.check(explorateur) && !c.isEstDebut()) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    /** get the first choix of the interaction
+     * @param explorateur explorateur
+     * @return choix choix
+     */
+    public Choix getFirstChoix(Explorateur explorateur) {
+        for (Choix c : choix) {
+            if (c.check(explorateur) && c.isEstDebut()) {
+                return c;
+            }
+        }
+        return null;
     }
 
     public List<Transmission> getTransmissions() {

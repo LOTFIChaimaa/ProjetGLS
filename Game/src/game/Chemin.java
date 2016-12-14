@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Chemin {
@@ -15,6 +16,9 @@ public class Chemin {
     /** Simple constructor */
     public Chemin(String name) {
         this.name = name;
+        this.conditionsOuverture = new ArrayList<>();
+        this.conditionsVisibilite = new ArrayList<>();
+        this.descriptions = new ArrayList<>();
     }
 
     /** Complete constructor */

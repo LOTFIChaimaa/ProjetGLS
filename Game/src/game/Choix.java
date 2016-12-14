@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Choix {
@@ -13,6 +14,8 @@ public class Choix {
     /** Simple constructor */
     public Choix(String name) {
         this.name = name;
+        this.actions = new ArrayList<>();
+        this.conditions = new ArrayList<>();
     }
 
     /** Complete constructor */
@@ -22,6 +25,33 @@ public class Choix {
         this.estDebut = estDebut;
         this.estFin = estFin;
         this.conditions = conditions;
+    }
+
+    /** Checks if the Choix can be applied.
+     * @param explorateur Explorateur
+     * @return boolean
+     */
+    public boolean check(Explorateur explorateur) {
+        for(Condition c : this.conditions) {
+            if (!explorateur.check(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /** Get the actions that are possible
+     * @param explorateur explorateur
+     * @return the actions possibles
+     */
+    public List<Action> getPossiblesActions(Explorateur explorateur) {
+        List<Action> actionsPossibles=  new ArrayList<>();
+        for (Action action : actions) {
+            if (action.check(explorateur)) {
+                actionsPossibles.add(action);
+            }
+        }
+        return actionsPossibles;
     }
 
     public String getName() {

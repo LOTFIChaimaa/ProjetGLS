@@ -4,6 +4,7 @@ package prototype;
 import game.*;
 
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 /** This is a basic display for the prototype.
@@ -34,7 +35,7 @@ public class Display {
         indent();
         System.out.println("Objet " + objet.getName() + " :");
         indent();
-        System.out.println("** Description : " + objet.getDescription(explorateur).getTexte());
+        System.out.println("**Description : " + objet.getDescription(explorateur).getTexte());
     }
 
     /** Print informations about an "connaissance"
@@ -44,7 +45,7 @@ public class Display {
         indent();
         System.out.println("Connaissance " + connaissance.getName() + " :");
         indent();
-        System.out.println("** Description : " + connaissance.getDescription(explorateur).getTexte());
+        System.out.println("**Description : " + connaissance.getDescription(explorateur).getTexte());
     }
 
     /** Print informations about an "personne"
@@ -54,7 +55,7 @@ public class Display {
         indent();
         System.out.println("Personne " + personne.getName() + " :");
         indent();
-        System.out.println("** Description : " + personne.getDescription());
+        System.out.println("**Description : " + personne.getDescription());
     }
 
     /** Print informations about an "chemin"
@@ -68,7 +69,7 @@ public class Display {
         indent();
         System.out.println("Chemin " + chemin.getName() + " :");
         indent();
-        System.out.println("**Description " + chemin.getDescription(explorateur).getTexte() + ouvert);
+        System.out.println("**Description : " + chemin.getDescription(explorateur).getTexte() + ouvert);
     }
 
     /** Print the number of objects and the total size of the inventory
@@ -77,7 +78,7 @@ public class Display {
         indent();
         System.out.println("Nombre d'objets : " + explorateur.getObjets().size());
         indent();
-        System.out.println("** Taille : " + explorateur.getTailleInventaire() + "/" +  explorateur.getTailleMax());
+        System.out.println("**Taille : " + explorateur.getTailleInventaire() + "/" +  explorateur.getTailleMax());
     }
 
     /** Display all the objets of the player
@@ -86,8 +87,14 @@ public class Display {
         indent();
         System.out.println("Objets de l'explorateur :");
         nbTab++;
-        for (Objet objet : explorateur.getObjets()) {
-            print(objet);
+        if (explorateur.getObjets().isEmpty()) {
+            indent();
+            System.out.println("**Pas d'objet");
+        }
+        else {
+            for (Objet objet : explorateur.getObjets()) {
+                print(objet);
+            }
         }
         nbTab--;
     }
@@ -98,8 +105,14 @@ public class Display {
         indent();
         System.out.println("Connaissances de l'explorateur :");
         nbTab++;
-        for (Connaissance connaissance : explorateur.getConnaissances()) {
-            print(connaissance);
+        if (explorateur.getConnaissances().isEmpty()) {
+            indent();
+            System.out.println("**Pas de connaissance");
+        }
+        else {
+            for (Connaissance connaissance : explorateur.getConnaissances()) {
+                print(connaissance);
+            }
         }
         nbTab--;
     }
@@ -107,12 +120,18 @@ public class Display {
     /** Display all the "objet" in the current place
      */
     public void printObjetCurrentPlace() {
+        List<Objet> objets = (List<Objet>) explorateur.getLieuActuel().getTrouvablesVisibles(explorateur, Objet.class);
         indent();
-        Lieu lieu = explorateur.getLieuActuel();
-        System.out.println("Objets dans le lieu " + lieu.getName() + " :");
+        System.out.println("Objets dans le lieu " + explorateur.getLieuActuel().getName() + " :");
         nbTab++;
-        for (Objet objet : (List<Objet>) lieu.getTrouvablesVisibles(explorateur, Objet.class)) {
-            print(objet);
+        if (objets.isEmpty()) {
+            indent();
+            System.out.println("**Pas d'objet ici");
+        }
+        else {
+            for (Objet objet : objets) {
+                print(objet);
+            }
         }
         nbTab--;
     }
@@ -120,12 +139,18 @@ public class Display {
     /** Display all the "connaissance" in the current place
      */
     public void printConnaissanceCurrentPlace() {
-        Lieu lieu = explorateur.getLieuActuel();
+        List<Connaissance> connaissances = (List<Connaissance>) explorateur.getLieuActuel().getTrouvablesVisibles(explorateur, Connaissance.class);
         indent();
-        System.out.println("Connaissances dans le lieu " + lieu.getName() + " :");
+        System.out.println("Connaissances dans le lieu " + explorateur.getLieuActuel().getName() + " :");
         nbTab++;
-        for (Connaissance connaissance : (List<Connaissance>) lieu.getTrouvablesVisibles(explorateur, Connaissance.class)) {
-            print(connaissance);
+        if (connaissances.isEmpty()) {
+            indent();
+            System.out.println("**Pas de connaissance ici");
+        }
+        else {
+            for (Connaissance connaissance : connaissances) {
+                print(connaissance);
+            }
         }
         nbTab--;
     }
@@ -133,12 +158,18 @@ public class Display {
     /** Display all the "personne" in the current place
      */
     public void printPersonneCurrentPlace() {
-        Lieu lieu = explorateur.getLieuActuel();
+        List<Personne> personnes = (List<Personne>) explorateur.getLieuActuel().getTrouvablesVisibles(explorateur, Personne.class);
         indent();
-        System.out.println("Personnes dans le lieu " + lieu.getName() + " :");
+        System.out.println("Personnes dans le lieu " + explorateur.getLieuActuel().getName() + " :");
         nbTab++;
-        for (Personne personne : (List<Personne>) lieu.getTrouvablesVisibles(explorateur, Personne.class)) {
-            print(personne);
+        if (personnes.isEmpty()) {
+            indent();
+            System.out.println("**Pas de gens ici");
+        }
+        else {
+            for (Personne personne : personnes) {
+                print(personne);
+            }
         }
         nbTab--;
     }
@@ -147,13 +178,22 @@ public class Display {
     /** Display all the "chemin" accessible from the current place
      */
     public void printCheminCurrentPlace() {
-        Lieu lieu = explorateur.getLieuActuel();
+        List<Chemin> chemins = explorateur.getLieuActuel().getCheminsPossibles()
+                .stream()
+                .filter(chemin -> chemin.estVisible(explorateur))
+                .collect(Collectors.toList());
         indent();
-        System.out.println("Chemins " + lieu.getName() + " :");
+        System.out.println("Chemins " + explorateur.getLieuActuel().getName() + " :");
         // Print the "chemins" visibles
         nbTab++;
-        for (Chemin chemin : lieu.getCheminsPossibles().stream().filter(chemin -> chemin.estVisible(explorateur)).collect(Collectors.toList())) {
-            print(chemin);
+        if (chemins.isEmpty()) {
+            indent();
+            System.out.println("**Pas de gens ici");
+        }
+        else {
+            for (Chemin chemin : chemins) {
+                print(chemin);
+            }
         }
         nbTab--;
     }
@@ -165,14 +205,14 @@ public class Display {
         print(objet);
         indent();
         if (objet.estDeposable(explorateur)) {
-            System.out.println("** Peut être déposé");
+            System.out.println("**Peut être déposé");
         } else {
-            System.out.println("** Ne peut pas être déposé");
+            System.out.println("**Ne peut pas être déposé");
         }
         indent();
         if (objet.transformer(explorateur) != null) {
             nbTab++;
-            System.out.println("** Peut se transformer en :");
+            System.out.println("**Peut se transformer en :");
             print(objet.transformer(explorateur));
             nbTab--;
         }
@@ -209,11 +249,26 @@ public class Display {
         indent();
         // We check if the place at the end of the path is the current place of the player :
         if (chemin.getLieu1().getName().equals( explorateur.getLieuActuel().getName() )) {
-            System.out.println("** Va de " + chemin.getLieu1() + " vers " + chemin.getLieu2());
+            System.out.println("**Va de " + chemin.getLieu1().getName() + " vers " + chemin.getLieu2().getName());
         }
         else {
-            System.out.println("** Va de " + chemin.getLieu2() + " vers " + chemin.getLieu1());
+            System.out.println("**Va de " + chemin.getLieu2().getName() + " vers " + chemin.getLieu1().getName());
         }
+    }
+
+    /** Display the actions of a choix
+     * @param choix choix
+     */
+    public void printListAction(Choix choix) {
+        List<Action> actions = choix.getPossiblesActions(explorateur);
+        indent();
+        System.out.println(choix.getName());
+        nbTab++;
+        for (int i=0; i<actions.size(); i++) {
+            indent();
+            System.out.println("("+String.valueOf(i+1)+") " + actions.get(i).getTexte());
+        }
+        nbTab--;
     }
 
 }

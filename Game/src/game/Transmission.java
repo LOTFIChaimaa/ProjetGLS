@@ -35,8 +35,8 @@ public class Transmission {
         this.objetsConsommes.add(o);
     }
 
-    public void addConnaissance(Connaissance cn) {
-        this.connaissancesTransmis.add(cn);
+    public void addConnaissance(Connaissance c) {
+        this.connaissancesTransmis.add(c);
     }
 
     public void addCondition(Condition c) {
